@@ -8,11 +8,12 @@ plugins {
 
 android {
     namespace 'com.sales.android.projecttms'
+    compileOptions.encoding = 'windows-1251'
     compileSdk 33
 
     defaultConfig {
         applicationId "com.sales.android.projecttms"
-        minSdk 18
+        minSdk 21
         targetSdk 33
         versionCode 1
         versionName "1.0"
