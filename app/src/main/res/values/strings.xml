@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">ProjectTMS</string>
+    <string name="My_buildings">Мои дома</string>
+    <string name="Household">Квартир:</string>
+    <string name="notOpen">Не открыто:</string>
+    <string name="buildings">Дома</string>
+    <string name="contacts">Контакты</string>
+    <string name="results">Статистика</string>
 </resources>
