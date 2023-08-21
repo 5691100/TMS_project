@@ -86,6 +86,7 @@
                 style="@style/Widget.MaterialComponents.Chip.Choice"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:checkable="true"
                 android:text="@string/btk" />
 
             <com.google.android.material.chip.Chip
@@ -93,6 +94,7 @@
                 style="@style/Widget.MaterialComponents.Chip.Choice"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:checkable="true"
                 android:text="@string/mts" />
 
             <com.google.android.material.chip.Chip
@@ -100,6 +102,7 @@
                 style="@style/Widget.MaterialComponents.Chip.Choice"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:checkable="true"
                 android:text="@string/unet" />
 
             <com.google.android.material.chip.Chip
@@ -107,6 +110,7 @@
                 style="@style/Widget.MaterialComponents.Chip.Choice"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:checkable="true"
                 android:text="@string/amigo" />
 
             <com.google.android.material.chip.Chip
@@ -114,6 +118,7 @@
                 style="@style/Widget.MaterialComponents.Chip.Choice"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:checkable="true"
                 android:text="@string/cosmos" />
 
             <com.google.android.material.chip.Chip
@@ -121,6 +126,7 @@
                 style="@style/Widget.MaterialComponents.Chip.Choice"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:checkable="true"
                 android:text="@string/other" />
 
         </com.google.android.material.chip.ChipGroup>
@@ -139,6 +145,7 @@
         android:id="@+id/providerMobileChipGroup"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        app:checkedChip="@+id/providerMobileChipGroup"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/providerMobileTitle"
         app:singleSelection="true">
@@ -148,6 +155,7 @@
             style="@style/Widget.MaterialComponents.Chip.Choice"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:checkable="true"
             android:text="@string/a1" />
 
         <com.google.android.material.chip.Chip
@@ -155,6 +163,7 @@
             style="@style/Widget.MaterialComponents.Chip.Choice"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:checkable="true"
             android:text="@string/mts" />
 
         <com.google.android.material.chip.Chip
@@ -162,6 +171,7 @@
             style="@style/Widget.MaterialComponents.Chip.Choice"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:checkable="true"
             android:text="@string/life" />
 
     </com.google.android.material.chip.ChipGroup>

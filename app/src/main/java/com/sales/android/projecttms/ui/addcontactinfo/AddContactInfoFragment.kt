@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.sales.android.projecttms.R
@@ -11,6 +12,8 @@ import com.sales.android.projecttms.databinding.FragmentAddContactInfoBinding
 import com.sales.android.projecttms.model.StatusOfHousehold
 import com.sales.android.projecttms.ui.householdslist.HouseholdListViewModel
 import dagger.hilt.android.AndroidEntryPoint
+
+const val COUNTRY_CODE = "+375"
 
 @AndroidEntryPoint
 class AddContactInfoFragment : Fragment() {
@@ -34,48 +37,52 @@ class AddContactInfoFragment : Fragment() {
         arguments?.apply {
             val buildingId = getInt("BuildingIdd")
             val householdNumber = getInt("HouseholdNumberr")
-
-//            viewModel.getHouseholdByBuildingIdAndNumberHH(buildingId, householdNumber)
+            viewModel.getHouseholdByBuildingIdAndNumberHH(buildingId, householdNumber)
         }
 
+        binding?.phoneInputEditText?.setText(COUNTRY_CODE)
+
+        var providerFixed = ""
+        var providerMobile = ""
+        var totalPrice = 0
+
+        binding?.run {
+            chipGroupProviderFixed.setOnCheckedStateChangeListener { group, _ ->
+                when (group.checkedChipId) {
+                    R.id.chipBTK -> providerFixed = "БTK"
+                    R.id.chipMTS -> providerFixed = "МТС"
+                    R.id.chipUnet -> providerFixed = "Unet"
+                    R.id.chipAmigo -> providerFixed = "Amigo"
+                    R.id.chipCosmos -> providerFixed = "Cosmos"
+                    R.id.chipOther -> providerFixed = "Другой"
+                }
+            }
+            providerMobileChipGroup.setOnCheckedStateChangeListener { group, _ ->
+                when (group.checkedChipId) {
+                    R.id.chipMobileA1 -> providerMobile = "A1"
+                    R.id.chipMobileMTS -> providerMobile = "МТС"
+                    R.id.chipMobileLife -> providerMobile = "Life"
+                }
+            }
+            totalPriceChipGroup.setOnCheckedStateChangeListener { group, _ ->
+                when (group.checkedChipId) {
+                    R.id.chip40BYN -> totalPrice = 40
+                    R.id.chip50BYN -> totalPrice = 50
+                    R.id.chip60BYN -> totalPrice = 60
+                    R.id.chip70BYN -> totalPrice = 70
+                }
+            }
+        }
         binding?.run {
             saveButton.setOnClickListener {
                 viewModel.requiredHousehold.observe(viewLifecycleOwner) { household ->
                     if (household != null) {
-                        chipGroupProviderFixed.setOnCheckedStateChangeListener { group, checkedIds ->
-                            var providerFixed = ""
-                            when (group.checkedChipId) {
-                                R.id.chipBTK -> providerFixed = "БTK"
-                                R.id.chipMTS -> providerFixed = "МТС"
-                                R.id.chipUnet -> providerFixed = "Unet"
-                                R.id.chipAmigo -> providerFixed = "Amigo"
-                                R.id.chipCosmos -> providerFixed = "Cosmos"
-                                R.id.chipOther -> providerFixed = "Другой"
-                            }
-                            household.contact.fixedProvider = providerFixed
-                        }
-                        providerMobileChipGroup.setOnCheckedStateChangeListener { group, checkedIds ->
-                            var providerMobile = ""
-                            when (group.checkedChipId) {
-                                R.id.chipMobileA1 -> providerMobile = "A1"
-                                R.id.chipMobileMTS -> providerMobile = "МТС"
-                                R.id.chipMobileLife -> providerMobile = "Life"
-                            }
-                            household.contact.mobileProvider = providerMobile
-                        }
-                        totalPriceChipGroup.setOnCheckedStateChangeListener { group, checkedIds ->
-                            var totalPrice = 0
-                            when (group.checkedChipId) {
-                                R.id.chip40BYN -> totalPrice = 40
-                                R.id.chip50BYN -> totalPrice = 50
-                                R.id.chip60BYN -> totalPrice = 60
-                                R.id.chip70BYN -> totalPrice = 70
-                            }
-                            household.contact.totalPayment = totalPrice
-                        }
                         household.contact.name = binding?.nameInputEditText?.text.toString().trim()
                         household.contact.phoneNumber =
                             binding?.phoneInputEditText?.text.toString().trim()
+                        household.contact.fixedProvider = providerFixed
+                        household.contact.mobileProvider = providerMobile
+                        household.contact.totalPayment = totalPrice
                         household.statusOfHouseHold = StatusOfHousehold.THINKING.status
                         household.openStatus = true
                         household.reasonForStatus = ""
@@ -84,8 +91,9 @@ class AddContactInfoFragment : Fragment() {
                         viewModel.setHouseholdToFirebase(household)
                     }
                 }
+                parentFragmentManager.popBackStack()
+                Toast.makeText(requireContext(),"Контакт сохранен", Toast.LENGTH_LONG).show()
             }
-            parentFragmentManager.popBackStack()
         }
     }
 }

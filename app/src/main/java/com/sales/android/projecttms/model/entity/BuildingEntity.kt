@@ -11,7 +11,6 @@ data class BuildingEntity(
     var userId: Int,
     @PrimaryKey
     @ColumnInfo("buildingId")
-
     var buildingID: Int,
     @ColumnInfo("buildingStreet")
     var buildingStreet: String,
@@ -21,6 +20,8 @@ data class BuildingEntity(
     var houseCorpus: String,
     @ColumnInfo("connectedHH")
     var connectedHH: Int,
+    @ColumnInfo("contracts")
+    var contracts: Int,
     @ColumnInfo("houseHoldsList")
     var houseHoldsList: ArrayList<HouseholdData>,
     @ColumnInfo("openHH")
