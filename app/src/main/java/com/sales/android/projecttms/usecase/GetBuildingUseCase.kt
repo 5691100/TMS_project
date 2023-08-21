@@ -31,6 +31,6 @@ class GetBuildingUseCase @Inject constructor(
         buildingDatabaseRepository.getRequiredBuilding(buildingId).mapToBuildingData()
 
     suspend fun updateBuilding(building: BuildingData) {
-        buildingDatabaseRepository.saveBuilding(building)
+        buildingDatabaseRepository.updateBuilding(building)
     }
 }

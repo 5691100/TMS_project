@@ -51,8 +51,6 @@ class HouseholdListFragment : Fragment() {
         viewModel.householdList.observe(viewLifecycleOwner) { householdList ->
             setList(householdList)
         }
-
-        viewModel.getBuildingsFromData()
     }
 
 
