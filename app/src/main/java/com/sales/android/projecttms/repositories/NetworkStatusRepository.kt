@@ -7,7 +7,7 @@ import javax.inject.Singleton
 @Singleton
 class NetworkStatusRepository @Inject constructor() {
 
-    private val networkStatus = MutableStateFlow(true)
+    private val networkStatus = MutableStateFlow(false)
 
     fun getNetworkState() = networkStatus
 
