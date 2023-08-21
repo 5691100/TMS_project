@@ -10,7 +10,9 @@ import androidx.fragment.app.viewModels
 import com.sales.android.projecttms.R
 import com.sales.android.projecttms.databinding.FragmentAddContactInfoBinding
 import com.sales.android.projecttms.model.StatusOfHousehold
+import com.sales.android.projecttms.ui.householdslist.HouseholdListFragment
 import com.sales.android.projecttms.ui.householdslist.HouseholdListViewModel
+import com.sales.android.projecttms.utils.replaceFragment
 import dagger.hilt.android.AndroidEntryPoint
 
 const val COUNTRY_CODE = "+375"
@@ -89,10 +91,19 @@ class AddContactInfoFragment : Fragment() {
                         household.contact.comments =
                             binding?.commentsInputEditText?.text.toString().trim()
                         viewModel.setHouseholdToFirebase(household)
+                        Toast.makeText(requireContext(), "Контакт сохранен", Toast.LENGTH_LONG)
+                            .show()
+                        parentFragmentManager.replaceFragment(
+                            R.id.container,
+                            HouseholdListFragment().apply {
+                                arguments = Bundle().apply {
+                                    putInt("numberHHtoScroll", household.numberHH)
+                                    putInt("BuildingId", household.buildingID)
+                                }
+                            }, false
+                        )
                     }
                 }
-                parentFragmentManager.popBackStack()
-                Toast.makeText(requireContext(),"Контакт сохранен", Toast.LENGTH_LONG).show()
             }
         }
     }

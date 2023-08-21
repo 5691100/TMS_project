@@ -10,6 +10,7 @@ import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import com.sales.android.projecttms.model.BuildingData
+import com.sales.android.projecttms.model.HouseholdData
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
@@ -98,5 +99,15 @@ class BuildingFirebaseRepository @Inject constructor(
                 listBuildings.emit(list)
             }
         }
+    }
+
+    fun setHouseholdToBuildingFirebase(household: HouseholdData) {
+        Firebase.database.reference.child("New1").child((household.buildingID - 1).toString())
+            .child("houseHoldsList").child((household.numberHH - 1).toString()).setValue(household)
+            .addOnSuccessListener {
+                Log.i("firebase", "Got value")
+            }.addOnFailureListener {
+                Log.e("firebase", "Error getting data")
+            }
     }
 }
