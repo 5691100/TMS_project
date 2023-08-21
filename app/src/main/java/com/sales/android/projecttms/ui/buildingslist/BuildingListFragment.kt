@@ -62,7 +62,7 @@ class BuildingListFragment: Fragment() {
         val popup = PopupMenu(requireContext(), v)
         val inflater: MenuInflater = popup.menuInflater
         inflater.inflate(R.menu.menu_popup, popup.menu)
-        popup.setOnMenuItemClickListener { it ->
+        popup.setOnMenuItemClickListener {
             when (it.itemId) {
                 R.id.startWork -> {
                     showStartWorkDialog(buildingID)
@@ -88,7 +88,7 @@ class BuildingListFragment: Fragment() {
                         .setTitleText("Select date of start work")
                         .build()
                 datePicker.isCancelable = false
-                datePicker.show(parentFragmentManager, "tag");
+                datePicker.show(parentFragmentManager, "tag")
                 datePicker.addOnPositiveButtonClickListener {
                     date = it
                 }
