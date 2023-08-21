@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.sales.android.projecttms.model.BuildingData
 import com.sales.android.projecttms.model.HouseholdData
+import com.sales.android.projecttms.repositories.BuildingFirebaseRepository
 import com.sales.android.projecttms.repositories.HouseholdFirebaseRepository
 import com.sales.android.projecttms.repositories.NetworkStatusRepository
 import com.sales.android.projecttms.usecase.GetBuildingUseCase
@@ -18,22 +19,28 @@ import javax.inject.Inject
 class HouseholdListViewModel @Inject constructor(
     private val getBuildingUseCase: GetBuildingUseCase,
     private val networkStatusRepository: NetworkStatusRepository,
+    private val buildingFirebaseRepository: BuildingFirebaseRepository,
     private val householdFirebaseRepository: HouseholdFirebaseRepository
 ) : ViewModel() {
 
     var requiredHousehold = MutableLiveData<HouseholdData?>()
-    var requiredBuilding = MutableLiveData<BuildingData>()
+    var requiredBuilding = MutableLiveData<BuildingData?>()
     var householdList = MutableLiveData<ArrayList<HouseholdData>>()
 
 
     fun getHouseholdsByBuildingId(buildingID: Int) {
 
         viewModelScope.launch(Dispatchers.IO) {
-            networkStatusRepository.getNetworkState().collectLatest {
-                if (it) {
-                    householdFirebaseRepository.getHousehold(buildingID)
-                    householdFirebaseRepository.listHouseholds.collect { householdsList ->
-                        householdList.postValue(householdsList)
+            networkStatusRepository.getNetworkState().collectLatest { status ->
+                if (status) {
+                    getBuildingUseCase.getBuildingsFromFB().collectLatest { buildings ->
+                        if (buildings.isNotEmpty()) {
+                            val building = buildings.find { it.buildingID == buildingID }
+                            if (building != null) {
+                                requiredBuilding.postValue(building)
+                                householdList.postValue(building.houseHoldsList)
+                            }
+                        }
                     }
                 } else {
                     val building = getBuildingUseCase.getRequiredBuildingFromData(buildingID)
@@ -47,9 +54,14 @@ class HouseholdListViewModel @Inject constructor(
         viewModelScope.launch(Dispatchers.IO) {
             networkStatusRepository.getNetworkState().collectLatest { status ->
                 if (status) {
-                    householdFirebaseRepository.getHousehold(buildingID)
-                    householdFirebaseRepository.listHouseholds.collect { householdList ->
-                        requiredHousehold.postValue(householdList.find { it.numberHH == householdNumber })
+                    getBuildingUseCase.getBuildingsFromFB().collectLatest { buildings ->
+                        if (buildings.isNotEmpty()) {
+                            val building = buildings.find { it.buildingID == buildingID }
+                            if (building != null) {
+                                requiredBuilding.postValue(building)
+                                requiredHousehold.postValue(building.houseHoldsList.find { it.numberHH == householdNumber })
+                            }
+                        }
                     }
                 } else {
                     val building = getBuildingUseCase.getRequiredBuildingFromData(buildingID)
@@ -63,10 +75,11 @@ class HouseholdListViewModel @Inject constructor(
         viewModelScope.launch(Dispatchers.IO) {
             networkStatusRepository.getNetworkState().collectLatest { status ->
                 if (status) {
-                    householdFirebaseRepository.setHouseholdToFirebase(household)
+                    buildingFirebaseRepository.setHouseholdToBuildingFirebase(household)
                 } else {
-                    val building = getBuildingUseCase.getRequiredBuildingFromData(household.buildingID)
-                    building.houseHoldsList[household.numberHH-1] = household
+                    val building =
+                        getBuildingUseCase.getRequiredBuildingFromData(household.buildingID)
+                    building.houseHoldsList[household.numberHH - 1] = household
                     getBuildingUseCase.updateBuilding(building)
                 }
             }
