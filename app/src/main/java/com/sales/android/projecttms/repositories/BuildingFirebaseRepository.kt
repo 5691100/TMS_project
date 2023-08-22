@@ -17,7 +17,9 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class BuildingFirebaseRepository @Inject constructor(
-    private val database: DatabaseReference
+    private val database: DatabaseReference,
+    private val sharedPreferenceRepository: SharedPreferenceRepository
+
 ) {
 
     val listBuildings = MutableStateFlow(arrayListOf<BuildingData>())
@@ -88,7 +90,8 @@ class BuildingFirebaseRepository @Inject constructor(
                 try {
                     Log.e("list1", list.toString())
                     val building = ds.getValue(BuildingData::class.java)
-                    if (building != null) {
+                    val userId = sharedPreferenceRepository.getUserId()
+                    if ((building != null) && (building.userId == userId)) {
                         list.add(building)
                     }
                 } catch (e: Exception) {

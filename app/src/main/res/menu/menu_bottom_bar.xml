@@ -4,16 +4,19 @@
     <item
         android:id="@+id/buildings"
         android:enabled="true"
+        android:icon="@drawable/ic_show_hh"
         android:title="@string/buildings" />
 
     <item
         android:id="@+id/contacts"
         android:enabled="true"
+        android:icon="@drawable/ic_contacts"
         android:title="@string/contacts" />
 
     <item
         android:id="@+id/results"
         android:enabled="true"
-        android:title="@string/results" />
+        android:icon="@drawable/ic_profile"
+        android:title="@string/profile" />
 
 </menu>
