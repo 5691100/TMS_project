@@ -16,6 +16,7 @@ import com.sales.android.projecttms.model.HouseholdData
 import com.sales.android.projecttms.ui.householdslist.adapter.HouseholdListAdapter
 import com.sales.android.projecttms.ui.householdslist.dialog.AddHouseholdStatusDialog
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.delay
 
 @AndroidEntryPoint
 class HouseholdListFragment : Fragment() {
@@ -48,11 +49,24 @@ class HouseholdListFragment : Fragment() {
             viewModel.getHouseholdsByBuildingId(buildingId)
         }
 
-        viewModel.householdList.observe(viewLifecycleOwner) { householdList ->
-            setList(householdList)
+        viewModel.requiredBuilding.observe(viewLifecycleOwner) { building ->
+            if (building != null) {
+                binding?.householdsTitle?.text =
+                    "${building.buildingStreet} ${building.houseNumber} ${building.houseCorpus}"
+                setList(building.houseHoldsList)
+                arguments?.apply {
+                    val numberHH = getInt("numberHHtoScroll")
+                    binding?.buildingsRecyclerView?.scrollToPosition(numberHH - 1)
+                }
+            }
         }
-    }
 
+//        viewModel.householdList.observe(viewLifecycleOwner) { householdList ->
+//            setList(householdList)
+//        }
+
+
+    }
 
     private fun setList(list: List<HouseholdData>) {
         binding?.buildingsRecyclerView?.run {

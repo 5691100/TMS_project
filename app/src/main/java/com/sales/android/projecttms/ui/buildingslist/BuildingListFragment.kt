@@ -119,9 +119,7 @@ class BuildingListFragment: Fragment() {
                         HouseholdListFragment().apply {
                             arguments =Bundle().apply {
                                 putInt("BuildingId", buildingID)
-                                putString("Street", it.find { it.buildingID == buildingID }?.buildingStreet)
-                                putString("BuildingNumber", it.find { it.buildingID == buildingID }?.houseNumber.toString())
-                                putString("BuildingCorpus", it.find { it.buildingID == buildingID }?.houseCorpus)
+                                putInt("numberHHtoScroll", 0)
                             }
                         },
                         true

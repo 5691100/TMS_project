@@ -14,6 +14,7 @@ import com.sales.android.projecttms.model.StatusOfHousehold
 import com.sales.android.projecttms.ui.addcontactinfo.AddContactInfoFragment
 import com.sales.android.projecttms.ui.householdslist.HouseholdListViewModel
 import com.sales.android.projecttms.utils.addFragment
+import com.sales.android.projecttms.utils.replaceFragment
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -136,7 +137,7 @@ class AddHouseholdStatusDialog : BottomSheetDialogFragment() {
             addContactButton.setOnClickListener {
                 viewModel.requiredHousehold.observe(viewLifecycleOwner) {
                     if (it != null) {
-                        parentFragmentManager.addFragment(
+                        parentFragmentManager.replaceFragment(
                             R.id.container,
                             AddContactInfoFragment().apply {
                                 arguments = Bundle().apply {
