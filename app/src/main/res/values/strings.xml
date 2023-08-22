@@ -54,4 +54,7 @@
     <string name="_70byn">70BYN и более</string>
     <string name="comments">Комментарий:</string>
     <string name="nextContactDate">Дата следующего контакта:</string>
+    <string name="my_buildings">Мои дома</string>
+    <string name="return_with_no_changes">Вернуться без изменений</string>
+    <string name="profile">Профиль</string>
 </resources>

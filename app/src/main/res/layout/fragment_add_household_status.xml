@@ -241,4 +241,15 @@
 
     </com.google.android.material.textfield.TextInputLayout>
 
+    <Button
+        android:id="@+id/returnToHouseholds"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/commentsInputLayout"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="@dimen/dp16"
+        android:textAllCaps="false"
+        android:text="@string/return_with_no_changes"/>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

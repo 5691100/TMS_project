@@ -16,10 +16,21 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/dp8"
-            android:layout_marginTop="@dimen/dp8"
+            android:layout_marginTop="@dimen/dp12"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="Пушкинская 15 Б" />
+
+        <Button
+            android:id="@+id/returnToBuildings"
+            android:layout_marginEnd="@dimen/dp16"
+            android:layout_marginTop="@dimen/dp4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:textAllCaps="false"
+            android:text="@string/my_buildings"/>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/buildingsRecyclerView"

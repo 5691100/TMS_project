@@ -11,10 +11,14 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.setFragmentResult
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.sales.android.projecttms.R
 import com.sales.android.projecttms.databinding.FragmentHouseholdListBinding
 import com.sales.android.projecttms.model.HouseholdData
+import com.sales.android.projecttms.ui.addhhstatus.AddHouseholdStatusFragment
+import com.sales.android.projecttms.ui.buildingslist.NavigationFragment
 import com.sales.android.projecttms.ui.householdslist.adapter.HouseholdListAdapter
 import com.sales.android.projecttms.ui.householdslist.dialog.AddHouseholdStatusDialog
+import com.sales.android.projecttms.utils.replaceFragment
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.delay
 
@@ -56,15 +60,14 @@ class HouseholdListFragment : Fragment() {
                 setList(building.houseHoldsList)
                 arguments?.apply {
                     val numberHH = getInt("numberHHtoScroll")
-                    binding?.buildingsRecyclerView?.scrollToPosition(numberHH - 1)
+                    binding?.buildingsRecyclerView?.scrollToPosition(numberHH - 4)
                 }
             }
         }
 
-//        viewModel.householdList.observe(viewLifecycleOwner) { householdList ->
-//            setList(householdList)
-//        }
-
+        binding?.returnToBuildings?.setOnClickListener {
+            parentFragmentManager.replaceFragment(R.id.container, NavigationFragment(), false)
+        }
 
     }
 
@@ -72,12 +75,17 @@ class HouseholdListFragment : Fragment() {
         binding?.buildingsRecyclerView?.run {
             if (adapter == null) {
                 adapter = HouseholdListAdapter { household ->
-                    showAddStatusDialog(household).apply {
-                        arguments = Bundle().apply {
-                            putInt("BuildingId", household.buildingID)
-                            putInt("householdNumber", household.numberHH)
-                        }
-                    }
+                    parentFragmentManager.replaceFragment(
+                        R.id.container,
+                        AddHouseholdStatusFragment().apply {
+                            arguments = Bundle().apply {
+                                putInt("BuildingId", household.buildingID)
+                                putInt("householdNumber", household.numberHH)
+                            }
+                        },
+                        true
+                    )
+
                 }
                 layoutManager = LinearLayoutManager(requireContext())
             }
@@ -86,18 +94,18 @@ class HouseholdListFragment : Fragment() {
         }
     }
 
-    private fun showAddStatusDialog(household: HouseholdData) {
-
-        val buildingId = household.buildingID
-        val householdNumber = household.numberHH
-
-        setFragmentResult("BuildingID", bundleOf("bundleKey1" to buildingId))
-        setFragmentResult("HouseholdNumber", bundleOf("bundleKey2" to householdNumber))
-
-        AddHouseholdStatusDialog().apply {
-            onDismiss = {
-                Toast.makeText(requireContext(), "Status edited!", Toast.LENGTH_LONG).show()
-            }
-        }.show(parentFragmentManager, "Add status")
-    }
+//    private fun showAddStatusDialog(household: HouseholdData) {
+//
+//        val buildingId = household.buildingID
+//        val householdNumber = household.numberHH
+//
+//        setFragmentResult("BuildingID", bundleOf("bundleKey1" to buildingId))
+//        setFragmentResult("HouseholdNumber", bundleOf("bundleKey2" to householdNumber))
+//
+//        AddHouseholdStatusDialog().apply {
+//            onDismiss = {
+//                Toast.makeText(requireContext(), "Status edited!", Toast.LENGTH_LONG).show()
+//            }
+//        }.show(parentFragmentManager, "Add status")
+//    }
 }
