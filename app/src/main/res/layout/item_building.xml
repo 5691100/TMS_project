@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="@dimen/dp4">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:backgroundTint="#C4E4F3"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="8dp"
+        tools:layout_editor_absoluteY="8dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="@dimen/dp4">
+
+            <TextView
+                android:id="@+id/moreActions"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:drawableEndCompat="@drawable/ic_more"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/street"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="Пушкинская" />
+
+            <TextView
+                android:id="@+id/houseNumber"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dp4"
+                app:layout_constraintStart_toEndOf="@id/street"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:layout_editor_absoluteX="90dp"
+                tools:text="15" />
+
+            <TextView
+                android:id="@+id/houseCorpus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dp4"
+                app:layout_constraintStart_toEndOf="@id/houseNumber"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:layout_editor_absoluteX="114dp"
+                tools:text="Б" />
+
+            <TextView
+                android:id="@+id/numberHH"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp4"
+                android:text="@string/Household"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/street"
+                tools:layout_editor_absoluteY="19dp" />
+
+            <TextView
+                android:id="@+id/numberFactHH"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dp4"
+                android:layout_marginTop="@dimen/dp4"
+                app:layout_constraintStart_toEndOf="@id/numberHH"
+                app:layout_constraintTop_toBottomOf="@id/street"
+                tools:layout_editor_absoluteX="63dp"
+                tools:layout_editor_absoluteY="19dp"
+                tools:text="150" />
+
+            <TextView
+                android:id="@+id/openHH"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dp16"
+                android:layout_marginTop="@dimen/dp4"
+                android:text="@string/notOpen"
+                app:layout_constraintStart_toEndOf="@id/numberFactHH"
+                app:layout_constraintTop_toBottomOf="@id/street"
+                tools:layout_editor_absoluteX="95dp"
+                tools:layout_editor_absoluteY="19dp" />
+
+            <TextView
+                android:id="@+id/toOpenFactHH"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dp4"
+                android:layout_marginTop="@dimen/dp4"
+                app:layout_constraintStart_toEndOf="@id/openHH"
+                app:layout_constraintTop_toBottomOf="@id/street"
+                tools:layout_editor_absoluteX="176dp"
+                tools:layout_editor_absoluteY="19dp"
+                tools:text="120" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+
+</FrameLayout>
