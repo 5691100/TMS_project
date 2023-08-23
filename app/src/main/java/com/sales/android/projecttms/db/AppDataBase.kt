@@ -9,8 +9,5 @@ import com.sales.android.projecttms.utils.HouseholdTypeConverter
 @Database(entities = [BuildingEntity::class], version = 1)
 @TypeConverters(HouseholdTypeConverter::class)
 abstract class AppDatabase : RoomDatabase() {
-
     abstract fun getBuildingDao(): BuildingDao
-
-//    abstract fun getQuizDao(): QuizDao
 }

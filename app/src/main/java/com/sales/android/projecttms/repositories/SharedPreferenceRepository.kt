@@ -9,7 +9,6 @@ import javax.inject.Singleton
 
 private const val SHARED_PREF_FILE = "sharedPrefFile"
 private const val USER_PREF_FILE = "userPrefFile"
-private const val IS_FIRST_OPEN = "isFirstOpen"
 private const val USER_FIRST_NAME = "userFirstName"
 private const val USER_SECOND_NAME = "userSecondName"
 private const val USER_ID = "userId"
@@ -36,7 +35,10 @@ class SharedPreferenceRepository @Inject constructor(
     }
 
     fun getUserName(): String? {
-        return userPreferences.getString(USER_FIRST_NAME+""+ USER_SECOND_NAME, null)
+        val firstName = userPreferences.getString(USER_FIRST_NAME, null)
+        val lastName = userPreferences.getString(USER_SECOND_NAME, null)
+
+        return "$firstName $lastName"
     }
 
     fun getUserId(): Int? {

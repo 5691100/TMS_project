@@ -106,5 +106,21 @@ class AddContactInfoFragment : Fragment() {
                 }
             }
         }
+        binding?.returnToHouseholds?.setOnClickListener {
+            viewModel.requiredHousehold.observe(viewLifecycleOwner) { household ->
+                if (household != null) {
+                    parentFragmentManager.replaceFragment(
+                        R.id.container,
+                        HouseholdListFragment().apply {
+                            arguments = Bundle().apply {
+                                putInt("numberHHtoScroll", household.numberHH)
+                                putInt("BuildingId", household.buildingID)
+                            }
+                        },
+                        true
+                    )
+                }
+            }
+        }
     }
 }

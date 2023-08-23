@@ -17,7 +17,7 @@ class BuildingListAdapter (
         }
 
         override fun areContentsTheSame(oldItem: BuildingData, newItem: BuildingData): Boolean {
-            return oldItem.openHH == newItem.openHH
+            return oldItem.houseHoldsList == newItem.houseHoldsList
         }
 
     }

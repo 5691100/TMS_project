@@ -43,9 +43,8 @@ class HouseholdListViewModel @Inject constructor(
                         }
                     }
                 } else {
-                    val building = getBuildingUseCase.getRequiredBuildingFromData(buildingID)
-                    val householdsList: ArrayList<HouseholdData> = building.houseHoldsList
-                    householdList.postValue(householdsList)
+                    requiredBuilding.postValue(getBuildingUseCase.getRequiredBuildingFromData(buildingID))
+                    householdList.postValue(getBuildingUseCase.getRequiredBuildingFromData(buildingID).houseHoldsList)
                 }
             }
         }

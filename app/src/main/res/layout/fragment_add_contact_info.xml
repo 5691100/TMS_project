@@ -1,96 +1,169 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_margin="8dp"
-    android:background="@color/white">
+    android:fillViewport="true">
 
-    <Button
-        android:id="@+id/saveButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/dp4"
-        android:text="@string/save"
-        android:textAllCaps="false"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/title"
-        style="@style/pageTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/addContactsInfoTitle"
-        app:layout_constraintBottom_toTopOf="@id/nameInputLayout"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/nameInputLayout"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/dp8"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/saveButton">
+        android:layout_height="match_parent"
+        android:layout_margin="@dimen/dp8">
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/nameInputEditText"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:hint="@string/name" />
-
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/phoneInputLayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/nameInputLayout">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/phoneInputEditText"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:hint="@string/phoneNumber" />
-
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <TextView
-        android:id="@+id/providerFixed"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="@string/fixedProvider"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/phoneInputLayout" />
-
-    <HorizontalScrollView
-        android:id="@+id/providerFixedHorizontalView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/providerFixed">
-
-        <com.google.android.material.chip.ChipGroup
-            android:id="@+id/chipGroupProviderFixed"
+        <Button
+            android:id="@+id/saveButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:singleLine="true"
+            android:layout_marginTop="@dimen/dp4"
+            android:text="@string/save"
+            android:textAllCaps="false"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/title"
+            style="@style/pageTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/addContactsInfoTitle"
+            app:layout_constraintBottom_toTopOf="@id/nameInputLayout"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/nameInputLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp8"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/saveButton">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/nameInputEditText"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:hint="@string/name" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/phoneInputLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/nameInputLayout">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/phoneInputEditText"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:hint="@string/phoneNumber" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <TextView
+            android:id="@+id/providerFixed"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="@string/fixedProvider"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/phoneInputLayout" />
+
+        <HorizontalScrollView
+            android:id="@+id/providerFixedHorizontalView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/providerFixed">
+
+            <com.google.android.material.chip.ChipGroup
+                android:id="@+id/chipGroupProviderFixed"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:singleLine="true"
+                app:singleSelection="true">
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chipBTK"
+                    style="@style/Widget.MaterialComponents.Chip.Choice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checkable="true"
+                    android:text="@string/btk" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chipMTS"
+                    style="@style/Widget.MaterialComponents.Chip.Choice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checkable="true"
+                    android:text="@string/mts" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chipUnet"
+                    style="@style/Widget.MaterialComponents.Chip.Choice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checkable="true"
+                    android:text="@string/unet" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chipAmigo"
+                    style="@style/Widget.MaterialComponents.Chip.Choice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checkable="true"
+                    android:text="@string/amigo" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chipCosmos"
+                    style="@style/Widget.MaterialComponents.Chip.Choice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checkable="true"
+                    android:text="@string/cosmos" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chipOther"
+                    style="@style/Widget.MaterialComponents.Chip.Choice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checkable="true"
+                    android:text="@string/other" />
+
+            </com.google.android.material.chip.ChipGroup>
+        </HorizontalScrollView>
+
+        <TextView
+            android:id="@+id/providerMobileTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="@string/mobileProvider"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/providerFixedHorizontalView" />
+
+        <com.google.android.material.chip.ChipGroup
+            android:id="@+id/providerMobileChipGroup"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:checkedChip="@+id/providerMobileChipGroup"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/providerMobileTitle"
             app:singleSelection="true">
 
             <com.google.android.material.chip.Chip
-                android:id="@+id/chipBTK"
+                android:id="@+id/chipMobileA1"
                 style="@style/Widget.MaterialComponents.Chip.Choice"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:checkable="true"
-                android:text="@string/btk" />
+                android:text="@string/a1" />
 
             <com.google.android.material.chip.Chip
-                android:id="@+id/chipMTS"
+                android:id="@+id/chipMobileMTS"
                 style="@style/Widget.MaterialComponents.Chip.Choice"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -98,180 +171,125 @@
                 android:text="@string/mts" />
 
             <com.google.android.material.chip.Chip
-                android:id="@+id/chipUnet"
+                android:id="@+id/chipMobileLife"
                 style="@style/Widget.MaterialComponents.Chip.Choice"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:checkable="true"
-                android:text="@string/unet" />
-
-            <com.google.android.material.chip.Chip
-                android:id="@+id/chipAmigo"
-                style="@style/Widget.MaterialComponents.Chip.Choice"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:checkable="true"
-                android:text="@string/amigo" />
-
-            <com.google.android.material.chip.Chip
-                android:id="@+id/chipCosmos"
-                style="@style/Widget.MaterialComponents.Chip.Choice"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:checkable="true"
-                android:text="@string/cosmos" />
-
-            <com.google.android.material.chip.Chip
-                android:id="@+id/chipOther"
-                style="@style/Widget.MaterialComponents.Chip.Choice"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:checkable="true"
-                android:text="@string/other" />
+                android:text="@string/life" />
 
         </com.google.android.material.chip.ChipGroup>
-    </HorizontalScrollView>
-
-    <TextView
-        android:id="@+id/providerMobileTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="@string/mobileProvider"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/providerFixedHorizontalView" />
-
-    <com.google.android.material.chip.ChipGroup
-        android:id="@+id/providerMobileChipGroup"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:checkedChip="@+id/providerMobileChipGroup"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/providerMobileTitle"
-        app:singleSelection="true">
-
-        <com.google.android.material.chip.Chip
-            android:id="@+id/chipMobileA1"
-            style="@style/Widget.MaterialComponents.Chip.Choice"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:checkable="true"
-            android:text="@string/a1" />
-
-        <com.google.android.material.chip.Chip
-            android:id="@+id/chipMobileMTS"
-            style="@style/Widget.MaterialComponents.Chip.Choice"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:checkable="true"
-            android:text="@string/mts" />
-
-        <com.google.android.material.chip.Chip
-            android:id="@+id/chipMobileLife"
-            style="@style/Widget.MaterialComponents.Chip.Choice"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:checkable="true"
-            android:text="@string/life" />
-
-    </com.google.android.material.chip.ChipGroup>
-
-    <TextView
-        android:id="@+id/totalPriceTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/totalPrice"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/providerMobileChipGroup" />
-
-    <HorizontalScrollView
-        android:id="@+id/totalPriceHorizontalView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/totalPriceTitle">
-
-        <com.google.android.material.chip.ChipGroup
-            android:id="@+id/totalPriceChipGroup"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:singleLine="true"
-            app:singleSelection="true">
-
-            <com.google.android.material.chip.Chip
-                android:id="@+id/chip40BYN"
-                style="@style/Widget.MaterialComponents.Chip.Choice"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/_40byn" />
-
-            <com.google.android.material.chip.Chip
-                android:id="@+id/chip50BYN"
-                style="@style/Widget.MaterialComponents.Chip.Choice"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/_50byn" />
-
-            <com.google.android.material.chip.Chip
-                android:id="@+id/chip60BYN"
-                style="@style/Widget.MaterialComponents.Chip.Choice"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/_60byn" />
-
-            <com.google.android.material.chip.Chip
-                android:id="@+id/chip70BYN"
-                style="@style/Widget.MaterialComponents.Chip.Choice"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/_70byn" />
-
-        </com.google.android.material.chip.ChipGroup>
-    </HorizontalScrollView>
-
-    <TextView
-        android:id="@+id/comments"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/comments"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/totalPriceHorizontalView" />
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/commentsInputLayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/comments">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/commentsInputEditText"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:orientation="horizontal"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/commentsInputLayout">
-
-        <Button
-            android:id="@+id/dateOfNextContactButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/nextContactDate"
-            android:textAllCaps="false" />
 
         <TextView
-            android:id="@+id/dateOfNextContactTextView"
+            android:id="@+id/totalPriceTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="40dp"
-            android:textAllCaps="false"
-            tools:text="01/01/2023" />
+            android:text="@string/totalPrice"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/providerMobileChipGroup" />
 
-    </LinearLayout>
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <HorizontalScrollView
+            android:id="@+id/totalPriceHorizontalView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/totalPriceTitle">
+
+            <com.google.android.material.chip.ChipGroup
+                android:id="@+id/totalPriceChipGroup"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:singleLine="true"
+                app:singleSelection="true">
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chip40BYN"
+                    style="@style/Widget.MaterialComponents.Chip.Choice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/_40byn" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chip50BYN"
+                    style="@style/Widget.MaterialComponents.Chip.Choice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/_50byn" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chip60BYN"
+                    style="@style/Widget.MaterialComponents.Chip.Choice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/_60byn" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chip70BYN"
+                    style="@style/Widget.MaterialComponents.Chip.Choice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/_70byn" />
+
+            </com.google.android.material.chip.ChipGroup>
+        </HorizontalScrollView>
+
+        <TextView
+            android:id="@+id/comments"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/comments"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/totalPriceHorizontalView" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/commentsInputLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/comments">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/commentsInputEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <LinearLayout
+            android:id="@+id/nextContactLinearLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:orientation="horizontal"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/commentsInputLayout">
+
+            <Button
+                android:id="@+id/dateOfNextContactButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/nextContactDate"
+                android:textAllCaps="false" />
+
+            <TextView
+                android:id="@+id/dateOfNextContactTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="40dp"
+                android:textAllCaps="false"
+                tools:text="01/01/2023" />
+
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/returnToHouseholds"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/nextContactLinearLayout"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="@dimen/dp16"
+            android:textAllCaps="false"
+            android:text="@string/return_with_no_changes"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

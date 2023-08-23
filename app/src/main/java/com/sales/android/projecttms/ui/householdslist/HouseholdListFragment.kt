@@ -68,7 +68,6 @@ class HouseholdListFragment : Fragment() {
         binding?.returnToBuildings?.setOnClickListener {
             parentFragmentManager.replaceFragment(R.id.container, NavigationFragment(), false)
         }
-
     }
 
     private fun setList(list: List<HouseholdData>) {
@@ -93,19 +92,4 @@ class HouseholdListFragment : Fragment() {
             adapter?.notifyDataSetChanged()
         }
     }
-
-//    private fun showAddStatusDialog(household: HouseholdData) {
-//
-//        val buildingId = household.buildingID
-//        val householdNumber = household.numberHH
-//
-//        setFragmentResult("BuildingID", bundleOf("bundleKey1" to buildingId))
-//        setFragmentResult("HouseholdNumber", bundleOf("bundleKey2" to householdNumber))
-//
-//        AddHouseholdStatusDialog().apply {
-//            onDismiss = {
-//                Toast.makeText(requireContext(), "Status edited!", Toast.LENGTH_LONG).show()
-//            }
-//        }.show(parentFragmentManager, "Add status")
-//    }
 }

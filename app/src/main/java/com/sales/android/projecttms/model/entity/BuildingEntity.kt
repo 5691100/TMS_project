@@ -18,14 +18,8 @@ data class BuildingEntity(
     var houseNumber: Int,
     @ColumnInfo("houseCorpus")
     var houseCorpus: String,
-    @ColumnInfo("connectedHH")
-    var connectedHH: Int,
-    @ColumnInfo("contracts")
-    var contracts: Int,
     @ColumnInfo("houseHoldsList")
     var houseHoldsList: ArrayList<HouseholdData>,
-    @ColumnInfo("openHH")
-    var openHH: Int,
     @ColumnInfo("totalHH")
     var totalHH: Int
 )

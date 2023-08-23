@@ -95,14 +95,16 @@ class BuildingListFragment: Fragment() {
                 datePicker.addOnNegativeButtonClickListener {
                     parentFragmentManager.popBackStack()
                 }
-
                 parentFragmentManager.replaceFragment(
                     R.id.container,
-                    HouseholdListFragment(),
+                    HouseholdListFragment().apply {
+                        arguments =Bundle().apply {
+                            putInt("BuildingId", buildingID)
+                            putInt("numberHHtoScroll", 0)
+                        }
+                    },
                     true
                 )
-                setFragmentResult("DateOfWork", bundleOf("bundleKey" to date))
-                setFragmentResult("Id", bundleOf("bundleKey" to buildingID))
             }
             .setNegativeButton("Нет") { _, _ ->
             }
@@ -125,7 +127,6 @@ class BuildingListFragment: Fragment() {
                         true
                     )
                 }
-                setFragmentResult("Id", bundleOf("bundleKey" to buildingID))
             }
             .setNegativeButton("Нет") { _, _ ->
             }
