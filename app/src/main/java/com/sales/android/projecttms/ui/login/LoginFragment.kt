@@ -45,6 +45,9 @@ class LoginFragment : Fragment() {
                     visibility = View.VISIBLE
                 }
             }
+            isLoading.observe(viewLifecycleOwner) {
+                binding?.progressView?.visibility = if (it) View.VISIBLE else View.GONE
+            }
         }
         binding?.loginButton?.setOnClickListener {
             viewModel.login(

@@ -6,7 +6,6 @@ import androidx.annotation.RequiresApi
 import com.google.firebase.database.ChildEventListener
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import com.sales.android.projecttms.model.BuildingData
@@ -17,7 +16,6 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class BuildingFirebaseRepository @Inject constructor(
-    private val database: DatabaseReference,
     private val sharedPreferenceRepository: SharedPreferenceRepository
 
 ) {
@@ -30,13 +28,7 @@ class BuildingFirebaseRepository @Inject constructor(
             .addChildEventListener(object : ChildEventListener {
 
                 override fun onChildAdded(snapshot: DataSnapshot, previousChildName: String?) {
-//                    val building = snapshot.getValue(BuildingData::class.java)
-//                    val newList = listBuildings.value.apply {
-//                        building?.let { add(it) }
-//                    }
-//                    GlobalScope.launch {
-//                        listBuildings.emit(newList)
-//                    }
+
                 }
 
                 @RequiresApi(Build.VERSION_CODES.N)
@@ -52,12 +44,7 @@ class BuildingFirebaseRepository @Inject constructor(
                         }
                         }
                     }
-//                    listBuildings.value.apply {
-//                        remove(oldBuilding)
-//                        building?.let { add(it) }
-//                    }.forEach {
-//                        newList.add(it.copy())
-//                    }
+
                     GlobalScope.launch {
                         listBuildings.emit(arrayListOf())
                         listBuildings.emit(newList)

@@ -6,7 +6,8 @@ import com.sales.android.projecttms.utils.mapToBuildingEntity
 import javax.inject.Inject
 
 class BuildingDatabaseRepository @Inject constructor(
-    private val buildingDao: BuildingDao
+    private val buildingDao: BuildingDao,
+    private val sharedPreferenceRepository: SharedPreferenceRepository
 ) {
 
     suspend fun saveBuilding(building: BuildingData) {
@@ -17,7 +18,7 @@ class BuildingDatabaseRepository @Inject constructor(
         buildingDao.updateBuilding(building.mapToBuildingEntity())
     }
 
-    suspend fun getAllBuildings() = buildingDao.getAllBuildings()
+    suspend fun getAllBuildings() = buildingDao.getAllBuildings(sharedPreferenceRepository.getUserId())
 
     suspend fun getRequiredBuilding(buildingId: Int) = buildingDao.getRequiredBuilding(buildingId)
 }

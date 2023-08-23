@@ -10,10 +10,7 @@ fun BuildingData.mapToBuildingEntity(): BuildingEntity {
         buildingStreet,
         houseNumber,
         houseCorpus,
-        connectedHH,
-        contracts,
         houseHoldsList,
-        openHH,
         totalHH
     )
 }
@@ -25,10 +22,7 @@ fun BuildingEntity.mapToBuildingData(): BuildingData {
         buildingStreet,
         houseNumber,
         houseCorpus,
-        connectedHH,
-        contracts,
         houseHoldsList,
-        openHH,
         totalHH
     )
 }

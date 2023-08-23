@@ -12,8 +12,8 @@ interface BuildingDao {
     @Update
     suspend fun updateBuilding(building: BuildingEntity)
 
-    @Query("SELECT * FROM Building")
-    suspend fun getAllBuildings(): List<BuildingEntity>
+    @Query("SELECT * FROM Building WHERE userId = :userId")
+    suspend fun getAllBuildings(userId: Int?): List<BuildingEntity>
 
     @Query("SELECT * FROM Building WHERE buildingId = :buildingId")
     suspend fun getRequiredBuilding(buildingId: Int): BuildingEntity

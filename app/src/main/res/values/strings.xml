@@ -11,7 +11,7 @@
     <string name="password">Пароль</string>
     <string name="login_button">Авторизация</string>
     <string name="startWork">Начать работу по дому</string>
-    <string name="showHH">Просмотреть дома</string>
+    <string name="showHH">Просмотреть квартиры</string>
     <string name="showContacts">Показать контакты</string>
     <string name="notOpenHH">Не открыта:</string>
     <string name="notAtHome">Нет дома</string>
@@ -57,4 +57,7 @@
     <string name="my_buildings">Мои дома</string>
     <string name="return_with_no_changes">Вернуться без изменений</string>
     <string name="profile">Профиль</string>
+    <string name="title_app">SalesAppp</string>
+    <string name="exit">Выход</string>
+    <string name="contactsByBuildings">Контакты по домам</string>
 </resources>

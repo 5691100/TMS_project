@@ -25,25 +25,27 @@
                 android:layout_height="wrap_content"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
+                style="@style/item_title"
                 tools:text="123." />
 
             <TextView
                 android:id="@+id/openStatus"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/dp4"
+                android:textSize="18sp"
+                android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
                 tools:text="Открыта" />
 
             <TextView
                 android:id="@+id/name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dp4"
+                android:layout_marginTop="@dimen/dp8"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/numberHH"
+                style="@style/item_text"
                 tools:text="Андрей" />
 
             <TextView
@@ -51,9 +53,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/dp32"
-                android:layout_marginTop="@dimen/dp4"
+                android:layout_marginTop="@dimen/dp8"
                 app:layout_constraintStart_toEndOf="@id/name"
                 app:layout_constraintTop_toBottomOf="@id/numberHH"
+                style="@style/item_text"
                 tools:text="БТК/A1" />
 
             <TextView
@@ -61,9 +64,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/dp32"
-                android:layout_marginTop="@dimen/dp4"
+                android:layout_marginTop="@dimen/dp8"
                 app:layout_constraintStart_toEndOf="@id/provider"
                 app:layout_constraintTop_toBottomOf="@id/numberHH"
+                style="@style/item_text"
                 tools:text="60 BYN" />
 
             <TextView
@@ -73,6 +77,7 @@
                 android:layout_marginStart="@dimen/dp8"
                 app:layout_constraintStart_toEndOf="@id/numberHH"
                 app:layout_constraintTop_toTopOf="parent"
+                style="@style/item_title"
                 tools:text="Отказ до презентации" />
 
             <TextView
@@ -80,17 +85,20 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/dp12"
+                android:layout_marginTop="@dimen/dp2"
                 app:layout_constraintStart_toEndOf="@id/statusOfHousehold"
                 app:layout_constraintTop_toTopOf="parent"
+                style="@style/item_text"
                 tools:text="Пенсионеры" />
 
             <TextView
                 android:id="@+id/comments"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dp4"
+                android:layout_marginTop="@dimen/dp8"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/name"
+                style="@style/item_text"
                 tools:text="Comments" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>

@@ -8,7 +8,7 @@ import androidx.fragment.app.Fragment
 import com.sales.android.projecttms.R
 import com.sales.android.projecttms.databinding.FragmentNavigationBinding
 import com.sales.android.projecttms.ui.contactslist.ContactListFragment
-import com.sales.android.projecttms.ui.results.ResultsFragment
+import com.sales.android.projecttms.ui.profile.ProfileFragment
 import com.sales.android.projecttms.utils.replaceFragment
 
 class NavigationFragment: Fragment() {
@@ -44,7 +44,7 @@ class NavigationFragment: Fragment() {
                     return@setOnItemSelectedListener true
                 }
                 R.id.results -> {
-                    parentFragmentManager.replaceFragment(R.id.container2, ResultsFragment(), true)
+                    parentFragmentManager.replaceFragment(R.id.container2, ProfileFragment(), true)
                     return@setOnItemSelectedListener true
                 }
 //                R.id.menu -> {

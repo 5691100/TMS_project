@@ -1,6 +1,5 @@
-package com.sales.android.projecttms
+package com.sales.android.projecttms.ui
 
-import android.content.Intent
 import android.content.IntentFilter
 import android.net.ConnectivityManager
 import android.os.Build
@@ -8,16 +7,14 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
 import androidx.annotation.RequiresApi
-import androidx.lifecycle.ReportFragment.Companion.reportFragment
 import androidx.lifecycle.lifecycleScope
+import com.sales.android.projecttms.R
 import com.sales.android.projecttms.receiver.NetworkReceiver
 import com.sales.android.projecttms.repositories.LoginFBRepository
 import com.sales.android.projecttms.repositories.NetworkStatusRepository
-import com.sales.android.projecttms.ui.buildingslist.BuildingListFragment
 import com.sales.android.projecttms.ui.buildingslist.NavigationFragment
 import com.sales.android.projecttms.ui.login.LoginFragment
 import com.sales.android.projecttms.utils.getNetworkStatus
-import com.sales.android.projecttms.utils.replaceFragment
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.filter
@@ -66,8 +63,8 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    override fun onStop() {
-        super.onStop()
+    override fun onDestroy() {
+        super.onDestroy()
         unregisterReceiver(receiver)
     }
 }

@@ -2,8 +2,6 @@ package com.sales.android.projecttms.repositories
 
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.ktx.database
-import com.google.firebase.ktx.Firebase
 import com.sales.android.projecttms.model.User
 import javax.inject.Inject
 
@@ -27,7 +25,7 @@ class LoginFBRepository @Inject constructor(
                     database.child("Users").child(user.uid).get().addOnSuccessListener {
                         val userFirebase = it.getValue(User::class.java)
                         if (userFirebase != null) {
-                            sharedPreferenceRepository.saveUser(userFirebase.userFirstName, userFirebase.userSecondName, userFirebase.userId )
+                            sharedPreferenceRepository.saveUser(userFirebase.firstName, userFirebase.lastName, userFirebase.userId )
                         }
                     }
                 }

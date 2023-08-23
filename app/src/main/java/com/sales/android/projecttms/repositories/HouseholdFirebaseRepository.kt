@@ -28,13 +28,7 @@ class HouseholdFirebaseRepository @Inject constructor(
             .addChildEventListener(object : ChildEventListener {
 
                 override fun onChildAdded(snapshot: DataSnapshot, previousChildName: String?) {
-//                    val building = snapshot.getValue(BuildingData::class.java)
-//                    val newList = listBuildings.value.apply {
-//                        building?.let { add(it) }
-//                    }
-//                    GlobalScope.launch {
-//                        listBuildings.emit(newList)
-//                    }
+
                 }
 
                 @RequiresApi(Build.VERSION_CODES.N)
@@ -51,12 +45,7 @@ class HouseholdFirebaseRepository @Inject constructor(
                             }
                         }
                     }
-//                    listHouseholds.value.apply {
-//                        remove(oldHousehold)
-//                        household?.let { add(it.numberHH - 1, it) }
-//                    }.forEach {
-//                        newHouseholdList.add(it.copy())
-//                    }
+
                     GlobalScope.launch {
                         listHouseholds.emit(arrayListOf())
                         listHouseholds.emit(newHouseholdList)
@@ -65,15 +54,7 @@ class HouseholdFirebaseRepository @Inject constructor(
                 }
 
                 override fun onChildRemoved(snapshot: DataSnapshot) {
-//                    val building = snapshot.getValue(BuildingData::class.java)
-//                    val oldBuilding =
-//                        listBuildings.value.find { it.buildingID == building?.buildingID }
-//                    val newList = listBuildings.value.apply {
-//                        remove(oldBuilding)
-//                    }
-//                    GlobalScope.launch {
-//                        listBuildings.emit(newList)
-//                    }
+
                 }
 
                 override fun onChildMoved(snapshot: DataSnapshot, previousChildName: String?) {
