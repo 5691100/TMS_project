@@ -10,6 +10,7 @@ import com.sales.android.projecttms.R
 import com.sales.android.projecttms.databinding.FragmentLoginBinding
 import com.sales.android.projecttms.ui.buildingslist.NavigationFragment
 import com.sales.android.projecttms.utils.replaceFragment
+import com.sales.android.projecttms.utils.replaceWithAnimation
 import dagger.hilt.android.AndroidEntryPoint
 
 const val TAG = "Authentication"
@@ -33,10 +34,9 @@ class LoginFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         viewModel.run {
             openBuildingList = {
-                parentFragmentManager.replaceFragment(
+                parentFragmentManager.replaceWithAnimation(
                     R.id.container,
-                    NavigationFragment(),
-                    true
+                    NavigationFragment()
                 )
             }
             error.observe(viewLifecycleOwner) {

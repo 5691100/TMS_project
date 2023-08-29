@@ -19,6 +19,8 @@ import com.sales.android.projecttms.ui.buildingslist.NavigationFragment
 import com.sales.android.projecttms.ui.householdslist.adapter.HouseholdListAdapter
 import com.sales.android.projecttms.ui.householdslist.dialog.AddHouseholdStatusDialog
 import com.sales.android.projecttms.utils.replaceFragment
+import com.sales.android.projecttms.utils.replaceWithAnimation
+import com.sales.android.projecttms.utils.replaceWithReverseAnimation
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.delay
 
@@ -66,7 +68,7 @@ class HouseholdListFragment : Fragment() {
         }
 
         binding?.returnToBuildings?.setOnClickListener {
-            parentFragmentManager.replaceFragment(R.id.container, NavigationFragment(), false)
+            parentFragmentManager.replaceWithReverseAnimation(R.id.container, NavigationFragment())
         }
     }
 
@@ -74,15 +76,14 @@ class HouseholdListFragment : Fragment() {
         binding?.buildingsRecyclerView?.run {
             if (adapter == null) {
                 adapter = HouseholdListAdapter { household ->
-                    parentFragmentManager.replaceFragment(
+                    parentFragmentManager.replaceWithAnimation(
                         R.id.container,
                         AddHouseholdStatusFragment().apply {
                             arguments = Bundle().apply {
                                 putInt("BuildingId", household.buildingID)
                                 putInt("householdNumber", household.numberHH)
                             }
-                        },
-                        true
+                        }
                     )
 
                 }
