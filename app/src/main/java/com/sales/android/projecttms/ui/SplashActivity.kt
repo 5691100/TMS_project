@@ -10,7 +10,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
-private const val TIME_FINISH_SPLASH = 3000L
+private const val TIME_FINISH_SPLASH = 4000L
 
 class SplashActivity : AppCompatActivity() {
 

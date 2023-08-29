@@ -73,7 +73,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:checkable="true"
-            android:text="@string/thinkingStatus" />
+            android:text="@string/comeLater" />
 
     </com.google.android.material.chip.ChipGroup>
 
@@ -87,13 +87,31 @@
         app:layout_constraintStart_toEndOf="@id/chipGroupThinking"
         app:layout_constraintTop_toBottomOf="@id/thinking" />
 
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/commentsInputLayout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/addContactButton">
+
+        <com.google.android.material.textfield.TextInputEditText
+
+            android:id="@+id/commentsInputEditText"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:hint="@string/commentsToStatus" />
+    </com.google.android.material.textfield.TextInputLayout>
+
     <TextView
         android:id="@+id/refuseBeforePres"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp8"
         android:text="@string/refuseBeforePres"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/chipGroupThinking" />
+        app:layout_constraintTop_toBottomOf="@id/commentsInputLayout" />
 
     <com.google.android.material.chip.ChipGroup
         android:id="@+id/chipGroupRefuseBeforePres"
@@ -138,9 +156,9 @@
 
         <com.google.android.material.chip.ChipGroup
             android:id="@+id/chipGroupRefuseAfterPres"
-            app:singleLine="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            app:singleLine="true"
             app:singleSelection="true">
 
             <com.google.android.material.chip.Chip
@@ -223,33 +241,15 @@
         app:layout_constraintStart_toEndOf="@id/chipGroupContract"
         app:layout_constraintTop_toBottomOf="@id/contract" />
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/commentsInputLayout"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/chipGroupContract">
-
-        <com.google.android.material.textfield.TextInputEditText
-
-            android:id="@+id/commentsInputEditText"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:hint="@string/commentsToStatus" />
-
-    </com.google.android.material.textfield.TextInputLayout>
-
     <Button
         android:id="@+id/returnToHouseholds"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/commentsInputLayout"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="@dimen/dp16"
+        android:text="@string/return_with_no_changes"
         android:textAllCaps="false"
-        android:text="@string/return_with_no_changes"/>
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/requestForConnection" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

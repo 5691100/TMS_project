@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">ProjectTMS</string>
-    <string name="My_buildings">Мои дома</string>
+    <string name="My_buildings">Мои дома для обхода</string>
     <string name="Household">Квартир:</string>
     <string name="notOpen">Не открыто:</string>
     <string name="buildings">Дома</string>
@@ -60,4 +60,13 @@
     <string name="title_app">SalesAppp</string>
     <string name="exit">Выход</string>
     <string name="contactsByBuildings">Контакты по домам</string>
+    <string name="contactsTitle">Контактов:</string>
+    <string name="forTodayContacts">На сегодня:</string>
+    <string name="buildings_with_contacts">Контакты по домам</string>
+    <string name="all_buildings">Все дома</string>
+    <string name="editContactInfo">Редактировать</string>
+    <string name="make_a_call">Позвонить  </string>
+    <string name="makeCall">Позвонить</string>
+    <string name="editContact">Редактировать</string>
+    <string name="comeLater">Зайти позже</string>
 </resources>

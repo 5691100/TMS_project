@@ -22,8 +22,8 @@ class BuildingListViewHolder(private val binding: ItemBuildingBinding) :
             houseNumber.text = building.houseNumber.toString()
             houseCorpus.text = building.houseCorpus ?: ""
             toOpenFactHH.text = (building.totalHH - counter).toString()
-            moreActions.setOnClickListener {
-                onPopupClicked(building.buildingID, itemView)
+            itemView.setOnClickListener {
+                onPopupClicked(building.buildingID, it)
             }
         }
     }

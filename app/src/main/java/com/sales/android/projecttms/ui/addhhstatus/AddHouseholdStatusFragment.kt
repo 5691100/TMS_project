@@ -5,7 +5,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.setFragmentResultListener
 import androidx.fragment.app.viewModels
 import com.sales.android.projecttms.R
 import com.sales.android.projecttms.databinding.FragmentAddHouseholdStatusBinding
@@ -15,6 +14,8 @@ import com.sales.android.projecttms.ui.addcontactinfo.AddContactInfoFragment
 import com.sales.android.projecttms.ui.householdslist.HouseholdListFragment
 import com.sales.android.projecttms.ui.householdslist.HouseholdListViewModel
 import com.sales.android.projecttms.utils.replaceFragment
+import com.sales.android.projecttms.utils.replaceWithAnimation
+import com.sales.android.projecttms.utils.replaceWithReverseAnimation
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -78,14 +79,41 @@ class AddHouseholdStatusFragment : Fragment() {
                         household.statusOfHouseHold = StatusOfHousehold.NOT_OPEN.status
                         household.reasonForStatus = reasonForStatus
                         viewModel.setHouseholdToFirebase(household)
-                        parentFragmentManager.replaceFragment(
+                        parentFragmentManager.replaceWithReverseAnimation(
                             R.id.container,
                             HouseholdListFragment().apply {
                                 arguments = Bundle().apply {
                                     putInt("numberHHtoScroll", household.numberHH)
                                     putInt("BuildingId", household.buildingID)
                                 }
-                            }, false
+                            }
+                        )
+                    }
+                }
+            }
+
+            chipGroupThinking.setOnCheckedStateChangeListener { group, checkedIds ->
+                var reasonForStatus = ""
+                when (group.checkedChipId) {
+                    R.id.thinking -> {
+                        reasonForStatus = ReasonForStatus.THINKING.reason
+                    }
+                }
+                viewModel.requiredHousehold.observe(viewLifecycleOwner) { household ->
+                    if (household != null) {
+                        household.openStatus = true
+                        household.statusOfHouseHold = StatusOfHousehold.THINKING.status
+                        household.reasonForStatus = reasonForStatus
+                        household.contact.comments = binding?.commentsInputEditText?.text.toString().trim()
+                        viewModel.setHouseholdToFirebase(household)
+                        parentFragmentManager.replaceWithReverseAnimation(
+                            R.id.container,
+                            HouseholdListFragment().apply {
+                                arguments = Bundle().apply {
+                                    putInt("numberHHtoScroll", household.numberHH)
+                                    putInt("BuildingId", household.buildingID)
+                                }
+                            }
                         )
                     }
                 }
@@ -107,14 +135,14 @@ class AddHouseholdStatusFragment : Fragment() {
                         household.statusOfHouseHold = StatusOfHousehold.REFUSE_BEFORE_PRES.status
                         household.reasonForStatus = reasonForStatus
                         viewModel.setHouseholdToFirebase(household)
-                        parentFragmentManager.replaceFragment(
+                        parentFragmentManager.replaceWithReverseAnimation(
                             R.id.container,
                             HouseholdListFragment().apply {
                                 arguments = Bundle().apply {
                                     putInt("numberHHtoScroll", household.numberHH)
                                     putInt("BuildingId", household.buildingID)
                                 }
-                            }, false
+                            }
                         )
                     }
                 }
@@ -145,14 +173,14 @@ class AddHouseholdStatusFragment : Fragment() {
                         household.statusOfHouseHold = StatusOfHousehold.REFUSE_AFTER_PRES.status
                         household.reasonForStatus = reasonForStatus
                         viewModel.setHouseholdToFirebase(household)
-                        parentFragmentManager.replaceFragment(
+                        parentFragmentManager.replaceWithReverseAnimation(
                             R.id.container,
                             HouseholdListFragment().apply {
                                 arguments = Bundle().apply {
                                     putInt("numberHHtoScroll", household.numberHH)
                                     putInt("BuildingId", household.buildingID)
                                 }
-                            }, false
+                            }
                         )
                     }
                 }
@@ -161,15 +189,14 @@ class AddHouseholdStatusFragment : Fragment() {
             addContactButton.setOnClickListener {
                 viewModel.requiredHousehold.observe(viewLifecycleOwner) {
                     if (it != null) {
-                        parentFragmentManager.replaceFragment(
+                        parentFragmentManager.replaceWithAnimation(
                             R.id.container,
                             AddContactInfoFragment().apply {
                                 arguments = Bundle().apply {
                                     putInt("BuildingIdd", it.buildingID)
                                     putInt("HouseholdNumberr", it.numberHH)
                                 }
-                            },
-                            true
+                            }
                         )
                     }
                 }
@@ -177,15 +204,14 @@ class AddHouseholdStatusFragment : Fragment() {
             returnToHouseholds.setOnClickListener {
                 viewModel.requiredHousehold.observe(viewLifecycleOwner) { household ->
                     if (household != null) {
-                        parentFragmentManager.replaceFragment(
+                        parentFragmentManager.replaceWithReverseAnimation(
                             R.id.container,
                             HouseholdListFragment().apply {
                                 arguments = Bundle().apply {
                                     putInt("numberHHtoScroll", household.numberHH)
                                     putInt("BuildingId", household.buildingID)
                                 }
-                            },
-                            true
+                            }
                         )
                     }
                 }

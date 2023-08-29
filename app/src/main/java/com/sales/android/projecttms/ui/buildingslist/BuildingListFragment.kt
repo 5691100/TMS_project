@@ -1,15 +1,15 @@
 package com.sales.android.projecttms.ui.buildingslist
 
 import android.app.AlertDialog
+import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.MenuInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.PopupMenu
-import androidx.core.os.bundleOf
+import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.setFragmentResult
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.datepicker.MaterialDatePicker
@@ -17,8 +17,10 @@ import com.sales.android.projecttms.R
 import com.sales.android.projecttms.databinding.FragmentBuildingListBinding
 import com.sales.android.projecttms.model.BuildingData
 import com.sales.android.projecttms.ui.buildingslist.adapter.BuildingListAdapter
+import com.sales.android.projecttms.ui.contactslist.ContactListFragment
 import com.sales.android.projecttms.ui.householdslist.HouseholdListFragment
 import com.sales.android.projecttms.utils.replaceFragment
+import com.sales.android.projecttms.utils.replaceWithAnimation
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -36,6 +38,7 @@ class BuildingListFragment: Fragment() {
         return binding?.root
     }
 
+    @RequiresApi(Build.VERSION_CODES.Q)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel.run {
@@ -45,6 +48,7 @@ class BuildingListFragment: Fragment() {
         }
     }
 
+    @RequiresApi(Build.VERSION_CODES.Q)
     private fun setList(list: ArrayList<BuildingData>) {
         binding?.buildingsRecyclerView?.run {
             if (adapter == null) {
@@ -58,19 +62,40 @@ class BuildingListFragment: Fragment() {
         }
     }
 
+    @RequiresApi(Build.VERSION_CODES.Q)
     private fun showPopup(buildingID: Int, v: View) {
         val popup = PopupMenu(requireContext(), v)
         val inflater: MenuInflater = popup.menuInflater
         inflater.inflate(R.menu.menu_popup, popup.menu)
+        popup.setForceShowIcon(true)
         popup.setOnMenuItemClickListener {
             when (it.itemId) {
                 R.id.startWork -> {
                     showStartWorkDialog(buildingID)
                 }
                 R.id.showHH -> {
-                    showStartShowDialog(buildingID)
+                    viewModel.buildingListFB.observe(viewLifecycleOwner) {
+                        parentFragmentManager.replaceWithAnimation(
+                            R.id.container,
+                            HouseholdListFragment().apply {
+                                arguments =Bundle().apply {
+                                    putInt("BuildingId", buildingID)
+                                    putInt("numberHHtoScroll", 0)
+                                }
+                            }
+                        )
+                    }
                 }
                 R.id.showContacts -> {
+                    parentFragmentManager.replaceWithAnimation(
+                        R.id.container2,
+                        ContactListFragment().apply {
+                            arguments =Bundle().apply {
+                                putInt("BuildingId", buildingID)
+                                putInt("numberHHtoScroll", 0)
+                            }
+                        }
+                    )
                 }
             }
             return@setOnMenuItemClickListener true
@@ -95,15 +120,14 @@ class BuildingListFragment: Fragment() {
                 datePicker.addOnNegativeButtonClickListener {
                     parentFragmentManager.popBackStack()
                 }
-                parentFragmentManager.replaceFragment(
+                parentFragmentManager.replaceWithAnimation(
                     R.id.container,
                     HouseholdListFragment().apply {
                         arguments =Bundle().apply {
                             putInt("BuildingId", buildingID)
                             putInt("numberHHtoScroll", 0)
                         }
-                    },
-                    true
+                    }
                 )
             }
             .setNegativeButton("Нет") { _, _ ->
@@ -116,9 +140,30 @@ class BuildingListFragment: Fragment() {
             .setTitle("Просмотреть квартиры?")
             .setPositiveButton("Да") { _, _ ->
                 viewModel.buildingListFB.observe(viewLifecycleOwner) {
-                    parentFragmentManager.replaceFragment(
+                    parentFragmentManager.replaceWithAnimation(
                         R.id.container,
                         HouseholdListFragment().apply {
+                            arguments =Bundle().apply {
+                                putInt("BuildingId", buildingID)
+                                putInt("numberHHtoScroll", 0)
+                            }
+                        }
+                    )
+                }
+            }
+            .setNegativeButton("Нет") { _, _ ->
+            }
+            .show()
+    }
+
+    private fun showContactsListDialog(buildingID: Int) {
+        AlertDialog.Builder(requireContext())
+            .setTitle("Просмотреть контакты по дому?")
+            .setPositiveButton("Да") { _, _ ->
+                viewModel.buildingListFB.observe(viewLifecycleOwner) {
+                    parentFragmentManager.replaceFragment(
+                        R.id.container,
+                        ContactListFragment().apply {
                             arguments =Bundle().apply {
                                 putInt("BuildingId", buildingID)
                                 putInt("numberHHtoScroll", 0)

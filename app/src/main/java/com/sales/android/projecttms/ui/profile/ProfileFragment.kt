@@ -12,6 +12,7 @@ import com.sales.android.projecttms.repositories.LoginFBRepository
 import com.sales.android.projecttms.repositories.SharedPreferenceRepository
 import com.sales.android.projecttms.ui.login.LoginFragment
 import com.sales.android.projecttms.utils.replaceFragment
+import com.sales.android.projecttms.utils.replaceWithAnimation
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -46,10 +47,8 @@ class ProfileFragment: Fragment() {
             binding?.name?.text = it
         }
 
-
-
         binding?.logoutButton?.setOnClickListener{
-            parentFragmentManager.replaceFragment(R.id.container, LoginFragment(), false)
+            parentFragmentManager.replaceWithAnimation(R.id.container, LoginFragment())
             loginFBRepository.logOut()
         }
     }
