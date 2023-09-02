@@ -20,15 +20,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.sales.android.projecttms.R
 import com.sales.android.projecttms.databinding.FragmentContactListBinding
 import com.sales.android.projecttms.model.ContactData
-import com.sales.android.projecttms.model.HouseholdData
-import com.sales.android.projecttms.ui.addcontactinfo.AddContactInfoFragment
-import com.sales.android.projecttms.ui.addhhstatus.AddHouseholdStatusFragment
 import com.sales.android.projecttms.ui.buildingcontact.BuildingsWithContactsFragment
-import com.sales.android.projecttms.ui.buildingslist.NavigationFragment
 import com.sales.android.projecttms.ui.contactslist.adapter.ContactsListAdapter
 import com.sales.android.projecttms.ui.editcontactinfo.EditContactInfoFragment
-import com.sales.android.projecttms.ui.householdslist.HouseholdListFragment
-import com.sales.android.projecttms.ui.householdslist.adapter.HouseholdListAdapter
 import com.sales.android.projecttms.utils.mapToArrayListContactsList
 import com.sales.android.projecttms.utils.replaceFragment
 import com.sales.android.projecttms.utils.replaceWithAnimation
