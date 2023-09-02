@@ -81,7 +81,7 @@ class EditContactInfoFragment: Fragment() {
         var totalPrice = 0
         var statusOfHousehold = StatusOfHousehold.THINKING.status
         var reasonForStatus = ""
-        var statusOfContact = ""
+        var statusOfContact = StatusOfContact.THINKING.status
 
         binding?.run {
             chipGroupProviderFixed.setOnCheckedStateChangeListener { group, _ ->
