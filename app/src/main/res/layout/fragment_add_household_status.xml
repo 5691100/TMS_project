@@ -7,12 +7,35 @@
     android:padding="16dp">
 
     <TextView
+        android:id="@+id/backButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp2"
+        android:paddingTop="@dimen/dp16"
+        android:paddingEnd="@dimen/dp16"
+        android:paddingStart="@dimen/dp8"
+        android:paddingBottom="@dimen/dp16"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:drawableStartCompat="@drawable/ic_back"
+        style="@style/item_title"/>
+
+    <TextView
+        android:id="@+id/title"
+        style="@style/pageTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/addStatus"
+        app:layout_constraintStart_toEndOf="@id/backButton"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
         android:id="@+id/notOpen"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/notOpenHH"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/backButton" />
 
     <com.google.android.material.chip.ChipGroup
         android:id="@+id/chipGroupNotOpen"
@@ -240,16 +263,5 @@
         android:textAllCaps="false"
         app:layout_constraintStart_toEndOf="@id/chipGroupContract"
         app:layout_constraintTop_toBottomOf="@id/contract" />
-
-    <Button
-        android:id="@+id/returnToHouseholds"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/dp16"
-        android:text="@string/return_with_no_changes"
-        android:textAllCaps="false"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/requestForConnection" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

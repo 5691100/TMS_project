@@ -69,4 +69,6 @@
     <string name="makeCall">Позвонить</string>
     <string name="editContact">Редактировать</string>
     <string name="comeLater">Зайти позже</string>
+    <string name="addStatus">Добавить статус</string>
+    <string name="expired">Просрочены:</string>
 </resources>

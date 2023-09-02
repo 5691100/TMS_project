@@ -9,31 +9,38 @@ import com.sales.android.projecttms.model.HouseholdData
 class HouseholdListViewHolder(private val binding: ItemHouseholdBinding) :
     RecyclerView.ViewHolder(binding.root) {
     @SuppressLint("SetTextI18n")
-    fun bind(household: HouseholdData) {
+    fun bind(household: HouseholdData, onItemClick: (household:HouseholdData) -> Unit) {
         binding.run {
             numberHH.text = household.numberHH.toString() + "."
-            if (household.openStatus == true) {
-                openStatus.text = "Opened"
+            if (household.connectedStatus) {
+                cardView.isClickable = false
+                openStatus.text = "A1"
                 openStatus.setTextColor(Color.parseColor("#13803e"))
             } else {
-                openStatus.text = "Closed"
-                openStatus.setTextColor(Color.parseColor("#d4482c"))
+                if (household.openStatus) {
+                    openStatus.text = "Opened"
+                    openStatus.setTextColor(Color.parseColor("#13803e"))
+                } else {
+                    openStatus.text = "Closed"
+                    openStatus.setTextColor(Color.parseColor("#d4482c"))
 
-            }
-            statusOfHousehold.text = household.statusOfHouseHold.toString() ?: ""
-            reasonForStatus.text = household.reasonForStatus.toString() ?: ""
-            if (household.contact != null) {
-                name.text = household.contact.name
-                if ((household.contact.fixedProvider != "") && (household.contact.mobileProvider != "")) {
-                    provider.text =
-                        household.contact.fixedProvider.toString() + "/" + household.contact.mobileProvider.toString()
                 }
-                if (household.contact.totalPayment != 0) {
-                    payment.text = household.contact.totalPayment.toString()
+                statusOfHousehold.text = household.statusOfHouseHold
+                reasonForStatus.text = household.reasonForStatus
+                run {
+                    name.text = household.contact.name
+                    if ((household.contact.fixedProvider != "") && (household.contact.mobileProvider != "")) {
+                        provider.text =
+                            household.contact.fixedProvider + "/" + household.contact.mobileProvider
+                    }
+                    if (household.contact.totalPayment != 0) {
+                        payment.text = household.contact.totalPayment.toString()
+                    }
+                    comments.text = household.contact.comments
+                    itemView.setOnClickListener{
+                        onItemClick(household)
+                    }
                 }
-                comments.text = household.contact.comments
-            } else {
-                ""
             }
         }
     }

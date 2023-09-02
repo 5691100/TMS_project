@@ -27,9 +27,8 @@ class HouseholdListAdapter(
     }
 
     override fun onBindViewHolder(holder: HouseholdListViewHolder, position: Int) {
-        holder.bind(getItem(position))
-        holder.itemView.setOnClickListener {
-            onItemClick(getItem(position))
-        }
+        holder.bind(getItem(position), onItemClick)
+//        holder.itemView.setOnClickListener {
+//            onItemClick(getItem(position))
     }
 }

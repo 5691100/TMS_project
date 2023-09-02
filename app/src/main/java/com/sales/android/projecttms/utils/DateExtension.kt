@@ -10,3 +10,9 @@ fun convertLongToTime(time: Long?): String {
     val format = SimpleDateFormat("dd/M/yyyy")
     return date?.let { format.format(it) } ?: ""
 }
+
+@SuppressLint("SimpleDateFormat")
+fun convertTimeToLong(time: String): Long {
+    val format = SimpleDateFormat("dd/M/yyyy")
+    return format.parse(time).time
+}

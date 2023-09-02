@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fillViewport="true">
+    android:fillViewport="true"
+    android:padding="@dimen/dp8">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -23,14 +24,14 @@
 
         <Button
             android:id="@+id/returnToBuildings"
-            android:layout_marginEnd="@dimen/dp16"
-            android:layout_marginTop="@dimen/dp4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="@dimen/dp4"
+            android:layout_marginEnd="@dimen/dp16"
+            android:text="@string/my_buildings"
             android:textAllCaps="false"
-            android:text="@string/my_buildings"/>
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/buildingsRecyclerView"
@@ -39,6 +40,23 @@
             android:layout_marginTop="@dimen/dp16"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/householdsTitle" />
+
+        <com.trendyol.bubblescrollbarlib.BubbleScrollBar
+            android:id="@+id/bubble_scroll_bar"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:foregroundGravity="right"
+            android:orientation="vertical"
+            app:bubbleBackground="@drawable/my_scroll"
+            app:bubbleElevation="6dp"
+            app:bubbleHeight="@dimen/dp48"
+            app:bubbleMargin="@dimen/dp4"
+            app:bubbleMinWidth="@dimen/dp48"
+            app:bubblePadding="@dimen/dp4"
+            app:bubbleTextColor="@color/white"
+            app:bubbleTextSize="8sp"
+            app:scrollbarBackground="@color/primary_variant"
+            app:thumbBackground="@color/primary" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>
