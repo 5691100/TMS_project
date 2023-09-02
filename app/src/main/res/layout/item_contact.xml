@@ -40,6 +40,16 @@
                 tools:text="Открыта" />
 
             <TextView
+                android:id="@+id/reasonForStatus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:textStyle="italic"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                tools:text="Открыта" />
+
+            <TextView
                 android:id="@+id/name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -92,11 +102,12 @@
 
             <TextView
                 android:id="@+id/comments"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dp8"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/provider"
+                app:layout_constraintEnd_toStartOf="@id/reasonForStatus"
                 style="@style/item_text"
                 tools:text="Comments" />
 

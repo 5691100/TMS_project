@@ -22,13 +22,26 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
+            android:id="@+id/backButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp2"
+            android:paddingTop="@dimen/dp16"
+            android:paddingEnd="@dimen/dp16"
+            android:paddingStart="@dimen/dp8"
+            android:paddingBottom="@dimen/dp16"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:drawableStartCompat="@drawable/ic_back"
+            style="@style/item_title"/>
+
+        <TextView
             android:id="@+id/title"
             style="@style/pageTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/addContactsInfoTitle"
-            app:layout_constraintBottom_toTopOf="@id/nameInputLayout"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintStart_toEndOf="@id/backButton"
             app:layout_constraintTop_toTopOf="parent" />
 
         <com.google.android.material.textfield.TextInputLayout
@@ -56,11 +69,11 @@
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/phoneInputEditText"
-                android:inputType="number"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:maxLength="13"
-                android:hint="@string/phoneNumber" />
+                android:hint="@string/phoneNumber"
+                android:inputType="number"
+                android:maxLength="13" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -260,7 +273,7 @@
             android:id="@+id/nextContactLinearLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="@dimen/dp8"
             android:orientation="horizontal"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/commentsInputLayout">
@@ -284,16 +297,107 @@
 
         </LinearLayout>
 
-        <Button
-            android:id="@+id/returnToHouseholds"
+        <TextView
+            android:id="@+id/refuseAfterPres"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@id/nextContactLinearLayout"
+            android:text="@string/refuseAfterPres"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginTop="@dimen/dp16"
+            app:layout_constraintTop_toBottomOf="@id/nextContactLinearLayout" />
+
+        <HorizontalScrollView
+            android:id="@+id/refuseAfterPresHorizontalView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/refuseAfterPres">
+
+            <com.google.android.material.chip.ChipGroup
+                android:id="@+id/chipGroupRefuseAfterPres"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:singleLine="true"
+                app:singleSelection="true">
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chipBadReviews"
+                    style="@style/Widget.MaterialComponents.Chip.Choice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checkable="true"
+                    android:text="@string/badReviews" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chipFiber"
+                    style="@style/Widget.MaterialComponents.Chip.Choice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checkable="true"
+                    android:text="@string/cabel" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chipCostly"
+                    style="@style/Widget.MaterialComponents.Chip.Choice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checkable="true"
+                    android:text="@string/costly" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chipObligations"
+                    style="@style/Widget.MaterialComponents.Chip.Choice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checkable="true"
+                    android:text="@string/obligations" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chipNotWant"
+                    style="@style/Widget.MaterialComponents.Chip.Choice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checkable="true"
+                    android:text="@string/doNotWant" />
+
+            </com.google.android.material.chip.ChipGroup>
+        </HorizontalScrollView>
+
+        <TextView
+            android:id="@+id/contract"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="@string/contractHH"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/refuseAfterPresHorizontalView" />
+
+        <com.google.android.material.chip.ChipGroup
+            android:id="@+id/chipGroupContract"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/contract"
+            app:singleSelection="true">
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chipContract"
+                style="@style/Widget.MaterialComponents.Chip.Choice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checkable="true"
+                android:text="@string/contractStatus" />
+
+        </com.google.android.material.chip.ChipGroup>
+
+        <Button
+            android:id="@+id/requestForConnection"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:text="@string/createContract"
             android:textAllCaps="false"
-            android:text="@string/return_with_no_changes"/>
+            app:layout_constraintStart_toEndOf="@id/chipGroupContract"
+            app:layout_constraintTop_toBottomOf="@id/contract" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

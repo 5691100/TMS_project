@@ -11,5 +11,6 @@ enum class ReasonForStatus (val reason: String) {
     CABLE ("Провода"),
     COSTLY ("Дорого"),
     OBLIGATIONS ("Привязка/акция"),
-    NOT_WANT ("Лень заниматься")
+    NOT_WANT ("Лень заниматься"),
+    LATER ("Зайти позже")
 }

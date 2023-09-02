@@ -8,17 +8,24 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.lifecycle.lifecycleScope
+import androidx.work.OneTimeWorkRequest
+import androidx.work.PeriodicWorkRequestBuilder
+import androidx.work.WorkManager
 import com.sales.android.projecttms.R
 import com.sales.android.projecttms.receiver.NetworkReceiver
 import com.sales.android.projecttms.repositories.LoginFBRepository
 import com.sales.android.projecttms.repositories.NetworkStatusRepository
 import com.sales.android.projecttms.ui.buildingslist.NavigationFragment
 import com.sales.android.projecttms.ui.login.LoginFragment
+import com.sales.android.projecttms.usecase.GetBuildingUseCase
 import com.sales.android.projecttms.utils.getNetworkStatus
+import com.sales.android.projecttms.worker.UpdateFirebaseWorker
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.filter
 import kotlinx.coroutines.launch
+import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -30,12 +37,19 @@ class MainActivity : AppCompatActivity() {
     @Inject
     lateinit var networkStatusRepository: NetworkStatusRepository
 
+    @Inject
+    lateinit var getBuildingUseCase: GetBuildingUseCase
+
     private val receiver = NetworkReceiver()
 
     @RequiresApi(Build.VERSION_CODES.M)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        GlobalScope.launch {
+            getBuildingUseCase.getBuildingsFromFB()
+        }
 
         val filter = IntentFilter().apply {
             addAction(ConnectivityManager.CONNECTIVITY_ACTION)
@@ -52,6 +66,10 @@ class MainActivity : AppCompatActivity() {
                         .show()
                 }
         }
+        val workRequestBuilder =
+            PeriodicWorkRequestBuilder<UpdateFirebaseWorker>(15, TimeUnit.MINUTES).build()
+        WorkManager.getInstance(this).enqueue(workRequestBuilder)
+
         if (loginFBRepository.isUserLogin()) {
             supportFragmentManager.beginTransaction()
                 .replace(R.id.container, NavigationFragment())
@@ -63,8 +81,18 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    override fun onStop() {
+        super.onStop()
+        val workRequestBuilder =
+            OneTimeWorkRequest.Builder(UpdateFirebaseWorker::class.java).build()
+        WorkManager.getInstance(this).enqueue(workRequestBuilder)
+    }
+
     override fun onDestroy() {
         super.onDestroy()
         unregisterReceiver(receiver)
+        val workRequestBuilder =
+            OneTimeWorkRequest.Builder(UpdateFirebaseWorker::class.java).build()
+        WorkManager.getInstance(this).enqueue(workRequestBuilder)
     }
 }

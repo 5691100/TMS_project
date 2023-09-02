@@ -93,6 +93,28 @@
                 app:layout_constraintTop_toBottomOf="@id/street"
                 tools:text="120" />
 
+            <TextView
+                android:id="@+id/expireContacts"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dp16"
+                android:layout_marginTop="@dimen/dp8"
+                android:text="@string/expired"
+                style="@style/item_text"
+                app:layout_constraintStart_toEndOf="@id/toCallFactHH"
+                app:layout_constraintTop_toBottomOf="@id/street" />
+
+            <TextView
+                android:id="@+id/expireFact"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dp4"
+                android:layout_marginTop="@dimen/dp8"
+                android:textSize="16sp"
+                app:layout_constraintStart_toEndOf="@id/expireContacts"
+                app:layout_constraintTop_toBottomOf="@id/street"
+                tools:text="120" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
 

@@ -11,6 +11,7 @@ import android.view.MenuInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.PopupMenu
+import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
@@ -19,15 +20,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.sales.android.projecttms.R
 import com.sales.android.projecttms.databinding.FragmentContactListBinding
 import com.sales.android.projecttms.model.ContactData
-import com.sales.android.projecttms.model.HouseholdData
-import com.sales.android.projecttms.ui.addcontactinfo.AddContactInfoFragment
-import com.sales.android.projecttms.ui.addhhstatus.AddHouseholdStatusFragment
 import com.sales.android.projecttms.ui.buildingcontact.BuildingsWithContactsFragment
-import com.sales.android.projecttms.ui.buildingslist.NavigationFragment
 import com.sales.android.projecttms.ui.contactslist.adapter.ContactsListAdapter
 import com.sales.android.projecttms.ui.editcontactinfo.EditContactInfoFragment
-import com.sales.android.projecttms.ui.householdslist.HouseholdListFragment
-import com.sales.android.projecttms.ui.householdslist.adapter.HouseholdListAdapter
 import com.sales.android.projecttms.utils.mapToArrayListContactsList
 import com.sales.android.projecttms.utils.replaceFragment
 import com.sales.android.projecttms.utils.replaceWithAnimation
@@ -40,15 +35,20 @@ class ContactListFragment : Fragment() {
 
     private var binding: FragmentContactListBinding? = null
 
-//    private val launcher = registerForActivityResult(
-//        ActivityResultContracts.RequestPermission()
-//    ) { granded ->
-//        if (granded) {
-//            val intent = Intent(Intent.ACTION_CALL)
-//            intent.data = Uri.fromParts("tel:", contact.phoneNumber, null)
-//            startActivity(intent)
-//        }
-//    }
+    private val launcher = registerForActivityResult(
+        ActivityResultContracts.RequestPermission()
+    ) { granded ->
+        if (granded) {
+            viewModel.requiredHousehold.observe(viewLifecycleOwner) {
+                val intent = Intent(Intent.ACTION_CALL)
+                val phone = it?.contact?.phoneNumber
+                intent.data = Uri.parse("tel:$phone")
+                startActivity(intent)
+            }
+        } else {
+            Toast.makeText(requireContext(), "Permission denied!", Toast.LENGTH_LONG).show()
+        }
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -105,14 +105,13 @@ class ContactListFragment : Fragment() {
         val popup = PopupMenu(requireContext(), v)
         val inflater: MenuInflater = popup.menuInflater
         inflater.inflate(R.menu.menu_popup_contacts, popup.menu)
+        viewModel.getHouseholdByBuildingIdAndNumberHH(contact.buildingID, contact.numberHH)
         popup.setForceShowIcon(true)
         popup.setOnMenuItemClickListener {
             when (it.itemId) {
                 R.id.makeCall -> {
                     try {
-                        val intent = Intent(Intent.ACTION_CALL)
-                        intent.data = Uri.fromParts("tel:", contact.phoneNumber, null)
-                        startActivity(intent)
+                        launcher.launch(android.Manifest.permission.CALL_PHONE)
                     } catch (e: Exception) {
                         Log.e("Exception", e.toString())
                     }

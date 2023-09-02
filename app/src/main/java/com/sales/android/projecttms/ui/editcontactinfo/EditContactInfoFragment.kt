@@ -10,6 +10,8 @@ import androidx.fragment.app.viewModels
 import com.google.android.material.datepicker.MaterialDatePicker
 import com.sales.android.projecttms.R
 import com.sales.android.projecttms.databinding.FragmentEditContactInfoBinding
+import com.sales.android.projecttms.model.ReasonForStatus
+import com.sales.android.projecttms.model.StatusOfContact
 import com.sales.android.projecttms.model.StatusOfHousehold
 import com.sales.android.projecttms.ui.addcontactinfo.COUNTRY_CODE
 import com.sales.android.projecttms.ui.contactslist.ContactListFragment
@@ -77,31 +79,71 @@ class EditContactInfoFragment: Fragment() {
         var providerFixed = ""
         var providerMobile = ""
         var totalPrice = 0
+        var statusOfHousehold = StatusOfHousehold.THINKING.status
+        var reasonForStatus = ""
+        var statusOfContact = ""
 
         binding?.run {
             chipGroupProviderFixed.setOnCheckedStateChangeListener { group, _ ->
-                when (group.checkedChipId) {
-                    R.id.chipBTK -> providerFixed = "ÁTK"
-                    R.id.chipMTS -> providerFixed = "ÌÒÑ"
-                    R.id.chipUnet -> providerFixed = "Unet"
-                    R.id.chipAmigo -> providerFixed = "Amigo"
-                    R.id.chipCosmos -> providerFixed = "Cosmos"
-                    R.id.chipOther -> providerFixed = "Äðóãîé"
+                providerFixed = when (group.checkedChipId) {
+                    R.id.chipBTK -> "ÁTK"
+                    R.id.chipMTS -> "ÌÒÑ"
+                    R.id.chipUnet -> "Unet"
+                    R.id.chipAmigo -> "Amigo"
+                    R.id.chipCosmos -> "Cosmos"
+                    R.id.chipOther -> "Äðóãîé"
+                    else -> ""
                 }
             }
             providerMobileChipGroup.setOnCheckedStateChangeListener { group, _ ->
-                when (group.checkedChipId) {
-                    R.id.chipMobileA1 -> providerMobile = "A1"
-                    R.id.chipMobileMTS -> providerMobile = "ÌÒÑ"
-                    R.id.chipMobileLife -> providerMobile = "Life"
+                providerMobile = when (group.checkedChipId) {
+                    R.id.chipMobileA1 -> "A1"
+                    R.id.chipMobileMTS -> "ÌÒÑ"
+                    R.id.chipMobileLife -> "Life"
+                    else -> ""
                 }
             }
             totalPriceChipGroup.setOnCheckedStateChangeListener { group, _ ->
+                totalPrice = when (group.checkedChipId) {
+                    R.id.chip40BYN -> 40
+                    R.id.chip50BYN -> 50
+                    R.id.chip60BYN -> 60
+                    R.id.chip70BYN -> 70
+                    else -> 0
+                }
+            }
+            chipGroupRefuseAfterPres.setOnCheckedStateChangeListener { group, _ ->
                 when (group.checkedChipId) {
-                    R.id.chip40BYN -> totalPrice = 40
-                    R.id.chip50BYN -> totalPrice = 50
-                    R.id.chip60BYN -> totalPrice = 60
-                    R.id.chip70BYN -> totalPrice = 70
+                    R.id.chipBadReviews -> {
+                        reasonForStatus = ReasonForStatus.REVIEWS.reason
+                        statusOfHousehold = StatusOfHousehold.REFUSE_AFTER_PRES.status
+                        statusOfContact = StatusOfContact.REFUSE.status
+                    }
+                    R.id.chipCostly -> {
+                        reasonForStatus = ReasonForStatus.COSTLY.reason
+                        statusOfHousehold = StatusOfHousehold.REFUSE_AFTER_PRES.status
+                        statusOfContact = StatusOfContact.REFUSE.status
+                    }
+                    R.id.chipFiber -> {
+                        reasonForStatus = ReasonForStatus.CABLE.reason
+                        statusOfHousehold = StatusOfHousehold.REFUSE_AFTER_PRES.status
+                        statusOfContact = StatusOfContact.REFUSE.status
+                    }
+                    R.id.chipObligations -> {
+                        reasonForStatus = ReasonForStatus.OBLIGATIONS.reason
+                        statusOfHousehold = StatusOfHousehold.REFUSE_AFTER_PRES.status
+                        statusOfContact = StatusOfContact.REFUSE.status
+                    }
+                    R.id.chipNotWant -> {
+                        reasonForStatus = ReasonForStatus.NOT_WANT.reason
+                        statusOfHousehold = StatusOfHousehold.REFUSE_AFTER_PRES.status
+                        statusOfContact = StatusOfContact.REFUSE.status
+                    }
+                    else -> {
+                        reasonForStatus = ""
+                        statusOfHousehold = StatusOfHousehold.THINKING.status
+                        statusOfContact = StatusOfContact.THINKING.status
+                    }
                 }
             }
             dateOfNextContactButton.setOnClickListener{
@@ -130,9 +172,11 @@ class EditContactInfoFragment: Fragment() {
                         household.contact.fixedProvider = providerFixed
                         household.contact.mobileProvider = providerMobile
                         household.contact.totalPayment = totalPrice
-                        household.statusOfHouseHold = StatusOfHousehold.THINKING.status
+                        household.statusOfHouseHold = statusOfHousehold
                         household.openStatus = true
-                        household.reasonForStatus = ""
+                        household.reasonForStatus = reasonForStatus
+                        household.contact.reasonForRefusal = reasonForStatus
+                        household.contact.statusOfContact = statusOfContact
                         household.contact.comments =
                             binding?.commentsInputEditText?.text.toString().trim()
                         household.contact.dateOfNextContact = binding?.dateOfNextContactTextView?.text.toString().trim()
@@ -152,7 +196,7 @@ class EditContactInfoFragment: Fragment() {
                 }
             }
         }
-        binding?.returnToHouseholds?.setOnClickListener {
+        binding?.backButton?.setOnClickListener {
             viewModel.requiredHousehold.observe(viewLifecycleOwner) { household ->
                 if (household != null) {
                     parentFragmentManager.replaceWithReverseAnimation(

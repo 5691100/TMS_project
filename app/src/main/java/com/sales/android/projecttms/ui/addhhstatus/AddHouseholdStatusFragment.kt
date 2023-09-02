@@ -95,8 +95,8 @@ class AddHouseholdStatusFragment : Fragment() {
             chipGroupThinking.setOnCheckedStateChangeListener { group, checkedIds ->
                 var reasonForStatus = ""
                 when (group.checkedChipId) {
-                    R.id.thinking -> {
-                        reasonForStatus = ReasonForStatus.THINKING.reason
+                    R.id.chipThinking -> {
+                        reasonForStatus = ReasonForStatus.LATER.reason
                     }
                 }
                 viewModel.requiredHousehold.observe(viewLifecycleOwner) { household ->
@@ -201,7 +201,7 @@ class AddHouseholdStatusFragment : Fragment() {
                     }
                 }
             }
-            returnToHouseholds.setOnClickListener {
+            backButton.setOnClickListener {
                 viewModel.requiredHousehold.observe(viewLifecycleOwner) { household ->
                     if (household != null) {
                         parentFragmentManager.replaceWithReverseAnimation(

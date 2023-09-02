@@ -5,11 +5,9 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
-import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.setFragmentResult
 import androidx.fragment.app.viewModels
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.sales.android.projecttms.R
 import com.sales.android.projecttms.databinding.FragmentHouseholdListBinding
@@ -17,12 +15,10 @@ import com.sales.android.projecttms.model.HouseholdData
 import com.sales.android.projecttms.ui.addhhstatus.AddHouseholdStatusFragment
 import com.sales.android.projecttms.ui.buildingslist.NavigationFragment
 import com.sales.android.projecttms.ui.householdslist.adapter.HouseholdListAdapter
-import com.sales.android.projecttms.ui.householdslist.dialog.AddHouseholdStatusDialog
-import com.sales.android.projecttms.utils.replaceFragment
 import com.sales.android.projecttms.utils.replaceWithAnimation
 import com.sales.android.projecttms.utils.replaceWithReverseAnimation
+import com.trendyol.bubblescrollbarlib.BubbleTextProvider
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.delay
 
 @AndroidEntryPoint
 class HouseholdListFragment : Fragment() {
@@ -72,6 +68,7 @@ class HouseholdListFragment : Fragment() {
         }
     }
 
+
     private fun setList(list: List<HouseholdData>) {
         binding?.buildingsRecyclerView?.run {
             if (adapter == null) {
@@ -85,12 +82,13 @@ class HouseholdListFragment : Fragment() {
                             }
                         }
                     )
-
                 }
                 layoutManager = LinearLayoutManager(requireContext())
             }
             (adapter as? HouseholdListAdapter)?.submitList(list)
             adapter?.notifyDataSetChanged()
         }
+        binding?.bubbleScrollBar?.attachToRecyclerView(binding!!.buildingsRecyclerView)
+        binding?.bubbleScrollBar?.bubbleTextProvider = BubbleTextProvider { list[it].numberHH.toString() }
     }
 }
