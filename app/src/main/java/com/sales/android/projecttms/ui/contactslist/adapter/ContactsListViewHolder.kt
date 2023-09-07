@@ -40,6 +40,7 @@ class ContactsListViewHolder(private val binding: ItemContactBinding) :
             openStatus.text = contact.statusOfContact
             comments.text = contact.comments
             reasonForStatus.text = contact.reasonForRefusal
+            numberOfUsers.text = contact.numberOfUsers
         }
     }
 }

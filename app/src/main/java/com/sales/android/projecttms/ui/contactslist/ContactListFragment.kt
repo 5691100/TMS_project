@@ -26,6 +26,7 @@ import com.sales.android.projecttms.ui.editcontactinfo.EditContactInfoFragment
 import com.sales.android.projecttms.utils.mapToArrayListContactsList
 import com.sales.android.projecttms.utils.replaceFragment
 import com.sales.android.projecttms.utils.replaceWithAnimation
+import com.sales.android.projecttms.utils.replaceWithReverseAnimation
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -82,7 +83,7 @@ class ContactListFragment : Fragment() {
         }
 
         binding?.returnToBuildings?.setOnClickListener {
-            parentFragmentManager.replaceFragment(R.id.container2, BuildingsWithContactsFragment(), true)
+            parentFragmentManager.replaceWithReverseAnimation(R.id.container2, BuildingsWithContactsFragment())
         }
     }
 

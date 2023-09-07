@@ -16,8 +16,8 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class BuildingFirebaseRepository @Inject constructor(
-    private val sharedPreferenceRepository: SharedPreferenceRepository
-
+    private val sharedPreferenceRepository: SharedPreferenceRepository,
+    private val buildingDatabaseRepository: BuildingDatabaseRepository
 ) {
 
     val listBuildings = MutableStateFlow(arrayListOf<BuildingData>())
@@ -34,14 +34,21 @@ class BuildingFirebaseRepository @Inject constructor(
                 @RequiresApi(Build.VERSION_CODES.N)
                 override fun onChildChanged(snapshot: DataSnapshot, previousChildName: String?) {
                     val building = snapshot.getValue(BuildingData::class.java)
+                    GlobalScope.launch {
+                        if (building != null) {
+                            buildingDatabaseRepository.updateBuilding(building)
+                        }
+                    }
                     val newList: ArrayList<BuildingData> = listBuildings.value
                     newList.replaceAll {
                         when {
                             it.buildingID == building?.buildingID -> {
                                 building
-                            }else -> {
-                            it
-                        }
+
+                            }
+                            else -> {
+                                it
+                            }
                         }
                     }
 
@@ -80,6 +87,9 @@ class BuildingFirebaseRepository @Inject constructor(
                     val userId = sharedPreferenceRepository.getUserId()
                     if ((building != null) && (building.userId == userId)) {
                         list.add(building)
+                        GlobalScope.launch {
+                            buildingDatabaseRepository.saveBuilding(building)
+                        }
                     }
                 } catch (e: Exception) {
                     Log.e("error", "error")

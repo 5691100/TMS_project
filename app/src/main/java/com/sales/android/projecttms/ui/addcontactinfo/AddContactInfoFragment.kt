@@ -59,6 +59,7 @@ class AddContactInfoFragment : Fragment() {
         var statusOfHousehold = StatusOfHousehold.THINKING.status
         var reasonForStatus = ""
         var statusOfContact = StatusOfContact.THINKING.status
+        var numberOfUsers = ""
 
         binding?.run {
             chipGroupProviderFixed.setOnCheckedStateChangeListener { group, _ ->
@@ -123,6 +124,13 @@ class AddContactInfoFragment : Fragment() {
                     }
                 }
             }
+            userNumberChipGroup.setOnCheckedStateChangeListener { group, _ ->
+                when (group.checkedChipId) {
+                    R.id.number1 -> numberOfUsers = "1"
+                    R.id.number2 -> numberOfUsers = "2"
+                    R.id.number3 -> numberOfUsers = "3 и более"
+                }
+            }
             dateOfNextContactButton.setOnClickListener {
                 val datePicker =
                     MaterialDatePicker.Builder.datePicker()
@@ -158,6 +166,7 @@ class AddContactInfoFragment : Fragment() {
                             binding?.commentsInputEditText?.text.toString().trim()
                         household.contact.dateOfNextContact =
                             binding?.dateOfNextContactTextView?.text.toString().trim()
+                        household.contact.numberOfUsers = numberOfUsers
                         viewModel.setHouseholdToFirebase(household)
                         Toast.makeText(requireContext(), "Контакт сохранен", Toast.LENGTH_LONG)
                             .show()

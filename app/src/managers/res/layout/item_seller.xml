@@ -20,35 +20,34 @@
             android:padding="@dimen/dp4">
 
             <TextView
-                android:id="@+id/street"
+                android:id="@+id/nameSeller"
                 style="@style/item_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                tools:text="Пушкинская" />
+                tools:text="Иван" />
 
             <TextView
-                android:id="@+id/houseNumber"
+                android:id="@+id/lastNameSeller"
                 style="@style/item_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/dp4"
-                app:layout_constraintStart_toEndOf="@id/street"
+                app:layout_constraintStart_toEndOf="@id/nameSeller"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:layout_editor_absoluteX="90dp"
-                tools:text="15" />
+                tools:text="Иванов" />
 
             <TextView
-                android:id="@+id/houseCorpus"
+                android:id="@+id/isOnWorkStatus"
                 style="@style/item_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/dp4"
-                app:layout_constraintStart_toEndOf="@id/houseNumber"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                tools:layout_editor_absoluteX="114dp"
-                tools:text="Б" />
+                tools:layout_editor_absoluteX="90dp"
+                tools:text="На работе" />
 
             <TextView
                 android:id="@+id/numberHH"
@@ -58,7 +57,7 @@
                 android:layout_marginTop="@dimen/dp8"
                 android:text="@string/Household"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/street" />
+                app:layout_constraintTop_toBottomOf="@id/nameSeller" />
 
             <TextView
                 android:id="@+id/numberFactHH"
@@ -68,7 +67,7 @@
                 android:layout_marginTop="@dimen/dp8"
                 android:textSize="16sp"
                 app:layout_constraintStart_toEndOf="@id/numberHH"
-                app:layout_constraintTop_toBottomOf="@id/street"
+                app:layout_constraintTop_toBottomOf="@id/nameSeller"
                 tools:text="150" />
 
             <TextView
@@ -80,7 +79,7 @@
                 android:layout_marginTop="@dimen/dp8"
                 android:text="@string/notOpen"
                 app:layout_constraintStart_toEndOf="@id/numberFactHH"
-                app:layout_constraintTop_toBottomOf="@id/street" />
+                app:layout_constraintTop_toBottomOf="@id/nameSeller" />
 
             <TextView
                 android:id="@+id/toOpenFactHH"
@@ -90,7 +89,7 @@
                 android:layout_marginTop="@dimen/dp8"
                 android:textSize="16sp"
                 app:layout_constraintStart_toEndOf="@id/openHH"
-                app:layout_constraintTop_toBottomOf="@id/street"
+                app:layout_constraintTop_toBottomOf="@id/nameSeller"
                 tools:text="120" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>

@@ -11,5 +11,6 @@ data class ContactData(
     var phoneNumber: String = "",
     var reasonForRefusal: String = "",
     var statusOfContact: String = "",
-    var totalPayment: Int = 0
+    var totalPayment: Int = 0,
+    var numberOfUsers: String = ""
 )
