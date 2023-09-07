@@ -7,7 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.sales.android.projecttms.R
 import com.sales.android.projecttms.databinding.FragmentHouseholdListBinding
@@ -42,13 +41,7 @@ class HouseholdListFragment : Fragment() {
 
         arguments?.apply {
             val buildingId = getInt("BuildingId")
-            val buildingStreet = getString("Street")
-            val houseNumber = getString("BuildingNumber")
-            val houseCorpus = getString("BuildingCorpus")
-
-            binding?.householdsTitle?.text =
-                "$buildingStreet $houseNumber $houseCorpus"
-            viewModel.getHouseholdsByBuildingId(buildingId)
+            viewModel.getBuildingByBuildingId(buildingId)
         }
 
         viewModel.requiredBuilding.observe(viewLifecycleOwner) { building ->
@@ -64,6 +57,7 @@ class HouseholdListFragment : Fragment() {
         }
 
         binding?.returnToBuildings?.setOnClickListener {
+            viewModel.updateSellerStatus(0)
             parentFragmentManager.replaceWithReverseAnimation(R.id.container, NavigationFragment())
         }
     }

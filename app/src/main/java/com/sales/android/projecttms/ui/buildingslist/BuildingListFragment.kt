@@ -16,15 +16,20 @@ import com.google.android.material.datepicker.MaterialDatePicker
 import com.sales.android.projecttms.R
 import com.sales.android.projecttms.databinding.FragmentBuildingListBinding
 import com.sales.android.projecttms.model.BuildingData
+import com.sales.android.projecttms.repositories.SharedPreferenceRepository
 import com.sales.android.projecttms.ui.buildingslist.adapter.BuildingListAdapter
 import com.sales.android.projecttms.ui.contactslist.ContactListFragment
 import com.sales.android.projecttms.ui.householdslist.HouseholdListFragment
 import com.sales.android.projecttms.utils.replaceFragment
 import com.sales.android.projecttms.utils.replaceWithAnimation
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 @AndroidEntryPoint
-class BuildingListFragment: Fragment() {
+class BuildingListFragment : Fragment() {
+
+    @Inject
+    lateinit var sharedPreferenceRepository: SharedPreferenceRepository
 
     private val viewModel: BuildingListViewModel by viewModels()
     private var binding: FragmentBuildingListBinding? = null
@@ -34,7 +39,7 @@ class BuildingListFragment: Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentBuildingListBinding.inflate(inflater,container,false)
+        binding = FragmentBuildingListBinding.inflate(inflater, container, false)
         return binding?.root
     }
 
@@ -78,7 +83,7 @@ class BuildingListFragment: Fragment() {
                         parentFragmentManager.replaceWithAnimation(
                             R.id.container,
                             HouseholdListFragment().apply {
-                                arguments =Bundle().apply {
+                                arguments = Bundle().apply {
                                     putInt("BuildingId", buildingID)
                                     putInt("numberHHtoScroll", 0)
                                 }
@@ -90,7 +95,7 @@ class BuildingListFragment: Fragment() {
                     parentFragmentManager.replaceWithAnimation(
                         R.id.container2,
                         ContactListFragment().apply {
-                            arguments =Bundle().apply {
+                            arguments = Bundle().apply {
                                 putInt("BuildingId", buildingID)
                                 putInt("numberHHtoScroll", 0)
                             }
@@ -116,19 +121,20 @@ class BuildingListFragment: Fragment() {
                 datePicker.show(parentFragmentManager, "tag")
                 datePicker.addOnPositiveButtonClickListener {
                     date = it
+                    viewModel.updateSellerStatus(1)
+                    parentFragmentManager.replaceWithAnimation(
+                        R.id.container,
+                        HouseholdListFragment().apply {
+                            arguments = Bundle().apply {
+                                putInt("BuildingId", buildingID)
+                                putInt("numberHHtoScroll", 0)
+                            }
+                        }
+                    )
                 }
                 datePicker.addOnNegativeButtonClickListener {
-                    parentFragmentManager.popBackStack()
+
                 }
-                parentFragmentManager.replaceWithAnimation(
-                    R.id.container,
-                    HouseholdListFragment().apply {
-                        arguments =Bundle().apply {
-                            putInt("BuildingId", buildingID)
-                            putInt("numberHHtoScroll", 0)
-                        }
-                    }
-                )
             }
             .setNegativeButton("Нет") { _, _ ->
             }
@@ -139,11 +145,11 @@ class BuildingListFragment: Fragment() {
         AlertDialog.Builder(requireContext())
             .setTitle("Просмотреть квартиры?")
             .setPositiveButton("Да") { _, _ ->
-                viewModel.buildingListFB.observe(viewLifecycleOwner) {
+                viewModel.buildingListFB.observe(/* owner = */ viewLifecycleOwner) {
                     parentFragmentManager.replaceWithAnimation(
                         R.id.container,
                         HouseholdListFragment().apply {
-                            arguments =Bundle().apply {
+                            arguments = Bundle().apply {
                                 putInt("BuildingId", buildingID)
                                 putInt("numberHHtoScroll", 0)
                             }
@@ -164,7 +170,7 @@ class BuildingListFragment: Fragment() {
                     parentFragmentManager.replaceFragment(
                         R.id.container,
                         ContactListFragment().apply {
-                            arguments =Bundle().apply {
+                            arguments = Bundle().apply {
                                 putInt("BuildingId", buildingID)
                                 putInt("numberHHtoScroll", 0)
                             }

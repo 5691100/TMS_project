@@ -196,6 +196,51 @@
         </com.google.android.material.chip.ChipGroup>
 
         <TextView
+            android:id="@+id/numberOfUsers"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginStart="@dimen/dp16"
+            android:text="@string/numberOfUsers"
+            app:layout_constraintStart_toEndOf="@id/providerMobileChipGroup"
+            app:layout_constraintTop_toBottomOf="@id/providerFixedHorizontalView" />
+
+        <com.google.android.material.chip.ChipGroup
+            android:id="@+id/userNumberChipGroup"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:checkedChip="@+id/providerMobileChipGroup"
+            app:layout_constraintStart_toStartOf="@id/numberOfUsers"
+            app:layout_constraintTop_toBottomOf="@id/providerMobileTitle"
+            app:singleSelection="true">
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/number1"
+                style="@style/Widget.MaterialComponents.Chip.Choice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checkable="true"
+                android:text="@string/number1" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/number2"
+                style="@style/Widget.MaterialComponents.Chip.Choice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checkable="true"
+                android:text="@string/number2" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/number3"
+                style="@style/Widget.MaterialComponents.Chip.Choice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checkable="true"
+                android:text="@string/number3" />
+
+        </com.google.android.material.chip.ChipGroup>
+
+        <TextView
             android:id="@+id/totalPriceTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

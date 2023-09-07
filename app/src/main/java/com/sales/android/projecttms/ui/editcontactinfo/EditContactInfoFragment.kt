@@ -73,6 +73,11 @@ class EditContactInfoFragment: Fragment() {
                     60 -> binding?.chip60BYN?.isChecked = true
                     70 -> binding?.chip70BYN?.isChecked = true
                 }
+                when (household.contact.numberOfUsers) {
+                    "1" -> binding?.number1?.isChecked = true
+                    "2" -> binding?.number2?.isChecked = true
+                    "3 и более" -> binding?.number3?.isChecked = true
+                }
             }
         }
 
@@ -82,6 +87,7 @@ class EditContactInfoFragment: Fragment() {
         var statusOfHousehold = StatusOfHousehold.THINKING.status
         var reasonForStatus = ""
         var statusOfContact = StatusOfContact.THINKING.status
+        var numberOfUsers = ""
 
         binding?.run {
             chipGroupProviderFixed.setOnCheckedStateChangeListener { group, _ ->
@@ -146,6 +152,13 @@ class EditContactInfoFragment: Fragment() {
                     }
                 }
             }
+            userNumberChipGroup.setOnCheckedStateChangeListener { group, _ ->
+                when (group.checkedChipId) {
+                    R.id.number1 -> numberOfUsers = "1"
+                    R.id.number2 -> numberOfUsers = "2"
+                    R.id.number3 -> numberOfUsers = "3 и более"
+                }
+            }
             dateOfNextContactButton.setOnClickListener{
                 val datePicker =
                     MaterialDatePicker.Builder.datePicker()
@@ -180,6 +193,7 @@ class EditContactInfoFragment: Fragment() {
                         household.contact.comments =
                             binding?.commentsInputEditText?.text.toString().trim()
                         household.contact.dateOfNextContact = binding?.dateOfNextContactTextView?.text.toString().trim()
+                        household.contact.numberOfUsers = numberOfUsers
                         viewModel.setHouseholdToFirebase(household)
                         Toast.makeText(requireContext(), "Контакт сохранен", Toast.LENGTH_LONG)
                             .show()

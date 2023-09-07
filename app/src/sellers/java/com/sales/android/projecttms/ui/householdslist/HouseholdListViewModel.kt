@@ -5,9 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.sales.android.projecttms.model.BuildingData
 import com.sales.android.projecttms.model.HouseholdData
-import com.sales.android.projecttms.repositories.BuildingFirebaseRepository
-import com.sales.android.projecttms.repositories.HouseholdFirebaseRepository
-import com.sales.android.projecttms.repositories.NetworkStatusRepository
+import com.sales.android.projecttms.repositories.*
 import com.sales.android.projecttms.usecase.GetBuildingUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
@@ -20,7 +18,8 @@ class HouseholdListViewModel @Inject constructor(
     private val getBuildingUseCase: GetBuildingUseCase,
     private val networkStatusRepository: NetworkStatusRepository,
     private val buildingFirebaseRepository: BuildingFirebaseRepository,
-    private val householdFirebaseRepository: HouseholdFirebaseRepository
+    private val sellersRepository: SellersRepository,
+    private val sharedPreferenceRepository: SharedPreferenceRepository
 ) : ViewModel() {
 
     var requiredHousehold = MutableLiveData<HouseholdData?>()
@@ -28,7 +27,7 @@ class HouseholdListViewModel @Inject constructor(
     var householdList = MutableLiveData<ArrayList<HouseholdData>>()
 
 
-    fun getHouseholdsByBuildingId(buildingID: Int) {
+    fun getBuildingByBuildingId(buildingID: Int) {
 
         viewModelScope.launch(Dispatchers.IO) {
             networkStatusRepository.getNetworkState().collectLatest { status ->
@@ -84,5 +83,10 @@ class HouseholdListViewModel @Inject constructor(
                 }
             }
         }
+    }
+
+    fun updateSellerStatus(isOnWork: Int) {
+        sellersRepository.setSellerStatusToSellerFirebase(isOnWork)
+        sharedPreferenceRepository.updateStatus(isOnWork)
     }
 }

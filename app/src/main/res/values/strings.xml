@@ -71,4 +71,9 @@
     <string name="comeLater">Зайти позже</string>
     <string name="addStatus">Добавить статус</string>
     <string name="expired">Просрочены:</string>
+    <string name="numberOfUsers">Количество пользователей: </string>
+    <string name="number1">1</string>
+    <string name="number2">2</string>
+    <string name="number3">3 и более</string>
+    <string name="people">человек</string>
 </resources>

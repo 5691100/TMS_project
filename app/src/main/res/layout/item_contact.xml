@@ -101,6 +101,29 @@
                 tools:text="60 BYN" />
 
             <TextView
+                android:id="@+id/numberOfUsers"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dp32"
+                android:layout_marginTop="@dimen/dp8"
+                app:layout_constraintStart_toEndOf="@id/payment"
+                app:layout_constraintTop_toBottomOf="@id/numberHH"
+                style="@style/item_text"
+                tools:text="3 и более" />
+
+            <TextView
+                android:id="@+id/people"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dp4"
+                android:layout_marginTop="@dimen/dp8"
+                app:layout_constraintStart_toEndOf="@id/numberOfUsers"
+                app:layout_constraintTop_toBottomOf="@id/numberHH"
+                android:text="@string/people"
+                style="@style/item_text"
+                />
+
+            <TextView
                 android:id="@+id/comments"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"

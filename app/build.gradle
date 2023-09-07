@@ -21,6 +21,20 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
+    flavorDimensions "version"
+    productFlavors {
+        sellers {
+            dimension "version"
+            applicationIdSuffix ".sellers"
+            versionNameSuffix "-sellers"
+        }
+        managers {
+            dimension "version"
+            applicationIdSuffix ".managers"
+            versionNameSuffix "-managers"
+        }
+    }
+
     buildTypes {
         release {
             minifyEnabled false
